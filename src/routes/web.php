@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login', [\App\Http\Controllers\AuthenticationController::class, 'login'])
+    ->name('login');
+Route::get('/logout', [\App\Http\Controllers\AuthenticationController::class, 'logout'])
+    ->name('logout');
+Route::post('/authenticate', [\App\Http\Controllers\AuthenticationController::class, 'authenticate'])
+    ->name('authenticate');
+Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'index'])
+    ->middleware('auth')
+    ->name('chat.index');
