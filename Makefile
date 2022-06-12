@@ -14,3 +14,5 @@ composer:
 	docker-compose exec web composer install
 npm:
 	docker-compose exec web npm install
+build:
+	docker-compose exec web npm run build
