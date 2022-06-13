@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "target": "ES6",
+        "module": "ESNext",
+        "jsx": "react",
+        "baseUrl": "./resources",
+        "paths": {
+            "@/*": ["./*"]
+        },
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "lib": [
+            "ESNext",
+            "DOM",
+        ],
+    },
+    "include": ["./resources/ts/**/*"]
+}
