@@ -1,7 +1,9 @@
 init:
-	docker-compose up -d
-	docker-compose exec web composer install
-	docker-compose exec web npm install
+	@make up
+	@make composer
+	@make fresh
+	@make npm
+	@make build
 up:
 	docker-compose up -d
 stop:
