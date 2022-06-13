@@ -2,7 +2,7 @@ module.exports = {
     mode: 'development',
     entry: './resources/ts/index.tsx',
     output: {
-        path: `${__dirname}/resources/js`,
+        path: `${__dirname}/public/js`,
         filename: 'index.js'
     },
     module: {
