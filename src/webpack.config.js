@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
     mode: 'development',
     entry: './resources/ts/index.tsx',
@@ -14,6 +16,9 @@ module.exports = {
         ],
     },
     resolve: {
+        alias: {
+            '@': path.resolve('./resources'),
+        },
         extensions: ['.ts', '.tsx', '.json'],
     },
 };
