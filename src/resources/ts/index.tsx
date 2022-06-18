@@ -1,4 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { App } from '@/ts/App'
 
-render(<h1>テスト</h1>, document.getElementById('app'));
+render(<App />, document.getElementById('app'));

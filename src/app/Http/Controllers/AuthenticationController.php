@@ -17,7 +17,7 @@ class AuthenticationController extends Controller
             return redirect('chat');
         }
 
-        return view('authentication.login');
+        return view('index');
     }
 
     public function authenticate(Request $request): RedirectResponse
