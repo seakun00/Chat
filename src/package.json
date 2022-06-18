@@ -1,7 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "build": "webpack"
+        "build": "webpack",
+        "watch": "webpack --watch"
     },
     "devDependencies": {
         "@emotion/react": "^11.9.3",

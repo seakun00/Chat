@@ -18,3 +18,5 @@ npm:
 	docker-compose exec web npm install
 build:
 	docker-compose exec web npm run build
+watch:
+	docker-compose exec web npm run watch
