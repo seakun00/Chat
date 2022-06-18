@@ -19,6 +19,6 @@ module.exports = {
         alias: {
             '@': path.resolve('./resources'),
         },
-        extensions: ['.ts', '.tsx', '.json'],
+        extensions: ['.js', '.ts', '.tsx', '.json'],
     },
 };
