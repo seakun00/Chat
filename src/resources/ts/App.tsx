@@ -5,7 +5,7 @@ import { Login } from "@/ts/Login";
 export const App = () => (
     <BrowserRouter>
         <Routes>
-            <Route path="login" element={<Login />} />
+            <Route path="login" element={<Login/>}/>
         </Routes>
     </BrowserRouter>
 );
