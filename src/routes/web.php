@@ -18,7 +18,7 @@ Route::get('/login', [AuthenticationController::class, 'login'])
     ->name('login');
 Route::get('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
-Route::post('/authenticate', [AuthenticationController::class, 'authenticate'])
+Route::post('/api/authenticate', [AuthenticationController::class, 'authenticate'])
     ->name('authenticate');
 Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'index'])
     ->middleware('auth')

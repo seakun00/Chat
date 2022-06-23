@@ -1,8 +1,11 @@
 import React from "react";
-import { Stack, TextField, Container, Button } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { Button, Container, Stack, TextField } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import { ValidationError } from "@/ts/error/ValidationError";
+import { client, getCsrfToken } from "@/ts/http/client";
 
 type FormInputs = {
+    _token: string | null;
     email: string;
     password: string;
 }
@@ -15,15 +18,25 @@ export const Login = () => {
         }
     });
 
-    const onSubmit = (data: FormInputs) => {
-        // エラーメッセージの動作確認
-        setError('email', {
-            type: 'server',
-            message: '正しい形式で入力してください'
-        })
-        setError('password', {
-            type: 'server',
-            message: '間違っています'
+    const onSubmit = async (formInputs: FormInputs) => {
+        formInputs._token = getCsrfToken() ?? null;
+        const data = await client('/api/authenticate', {
+            method: 'POST',
+            body: JSON.stringify(formInputs),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).catch((error) => {
+            if (error instanceof ValidationError) {
+                for (const key in error.userMessages) {
+                    if (key === "password" || key === "email") {
+                        setError(key, {
+                            type: 'server',
+                            message: error.userMessages[key]
+                        })
+                    }
+                }
+            }
         })
     };
 
@@ -33,16 +46,15 @@ export const Login = () => {
                 <Controller
                     name="email"
                     control={control}
-                    render={({ field }) => {
-                        console.log(errors)
-                        return <TextField
+                    render={({ field }) => (
+                        <TextField
                             {...field}
                             type="email"
                             label="メールアドレス"
                             error={!!errors.email}
                             helperText={errors.email?.message}
                         />
-                    }}
+                    )}
                 />
                 <Controller
                     name="password"
