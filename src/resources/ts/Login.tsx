@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
-import { ValidationError } from "@/ts/error/ValidationError";
+import { ValidationError } from "@/ts/http/error/ValidationError";
 import { client, getCsrfToken } from "@/ts/http/client";
 
 type FormInputs = {
