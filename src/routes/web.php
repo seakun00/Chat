@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,15 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', static function () {
-    return view('index');
-});
-Route::get('/login', [\App\Http\Controllers\AuthenticationController::class, 'login'])
+Route::get('/login', [AuthenticationController::class, 'login'])
     ->name('login');
-Route::get('/logout', [\App\Http\Controllers\AuthenticationController::class, 'logout'])
+Route::get('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
-Route::post('/authenticate', [\App\Http\Controllers\AuthenticationController::class, 'authenticate'])
+Route::post('/api/authenticate', [AuthenticationController::class, 'authenticate'])
     ->name('authenticate');
 Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'index'])
     ->middleware('auth')
     ->name('chat.index');
+Route::get('/{any}', static function () {
+    return view('index');
+})
+    ->where('any', '.*')
+    ->middleware('auth')
+    ->name('index');

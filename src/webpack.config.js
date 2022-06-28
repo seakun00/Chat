@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
     mode: 'development',
     entry: './resources/ts/index.tsx',
@@ -8,12 +10,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx$/,
+                test: /\.(ts|tsx)$/,
                 use: 'ts-loader',
             },
         ],
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.json'],
+        alias: {
+            '@': path.resolve('./resources'),
+        },
+        extensions: ['.js', '.ts', '.tsx', '.json'],
     },
 };

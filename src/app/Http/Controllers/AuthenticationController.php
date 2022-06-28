@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\ErrorResponseType;
+use App\Http\Requests\AuthenticationAuthenticateRequest;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,22 +21,22 @@ class AuthenticationController extends Controller
             return redirect('chat');
         }
 
-        return view('authentication.login');
+        return view('index');
     }
 
-    public function authenticate(Request $request): RedirectResponse
+    public function authenticate(AuthenticationAuthenticateRequest $request): JsonResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
+        $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
-            abort(400);
+            $jsonResponse = response()->json([
+                'message' => 'Login failed.',
+                'type' => ErrorResponseType::LOGIN_ERROR,
+            ], 400);
+            throw new HttpResponseException($jsonResponse);
         }
 
         $request->session()->regenerate();
-        return redirect()->intended('chat');
+        return response()->json();
     }
 
     public function logout(Request $request): RedirectResponse
