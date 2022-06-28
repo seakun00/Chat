@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\ErrorResponseType;
 use App\Http\Requests\AuthenticationAuthenticateRequest;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +28,11 @@ class AuthenticationController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (!Auth::attempt($credentials)) {
-            abort(400);
+            $jsonResponse = response()->json([
+                'message' => 'Login failed.',
+                'type' => ErrorResponseType::LOGIN_ERROR,
+            ], 400);
+            throw new HttpResponseException($jsonResponse);
         }
 
         $request->session()->regenerate();

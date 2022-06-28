@@ -6,9 +6,7 @@ export const client = (input: RequestInfo | URL, init?: RequestInit): Promise<Re
             if (data.ok) return data.json()
 
             const error = await data.json()
-            if (error.type) {
-                throw createError(error);
-            }
+            if (error.type) throw createError(error)
 
             throw new Error(error.message)
         })

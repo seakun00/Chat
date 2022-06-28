@@ -1,11 +1,14 @@
-import { validationErrorType } from "@/ts/http/error/errorResponseType";
+import {loginErrorType, validationErrorType} from "@/ts/http/error/errorResponseType";
 import { ValidationError } from "@/ts/http/error/ValidationError";
+import {LoginError} from "@/ts/http/error/LoginError";
 
 export const createError = (error: Record<string, any>) => {
     switch (error.type) {
         case validationErrorType:
             const userMessages = pickUserMessages(error.user_messages);
             return new ValidationError(error.message, userMessages);
+        case loginErrorType:
+            return new LoginError(error.message);
         default:
             throw new Error('Unexpected error type.');
     }

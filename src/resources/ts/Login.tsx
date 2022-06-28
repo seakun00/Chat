@@ -1,8 +1,9 @@
-import React from "react";
-import { Button, Container, Stack, TextField } from "@mui/material";
+import React, { useState } from "react";
+import {Alert, Button, Container, Stack, TextField} from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { ValidationError } from "@/ts/http/error/ValidationError";
 import { client, getCsrfToken } from "@/ts/http/client";
+import { LoginError } from "@/ts/http/error/LoginError";
 
 type FormInputs = {
     _token: string | null;
@@ -17,10 +18,11 @@ export const Login = () => {
             password: '',
         }
     });
+    const [loginError, setLoginError] = useState<string|null>();
 
-    const onSubmit = async (formInputs: FormInputs) => {
+    const onSubmit = (formInputs: FormInputs) => {
         formInputs._token = getCsrfToken() ?? null;
-        const data = await client('/api/authenticate', {
+        client('/api/authenticate', {
             method: 'POST',
             body: JSON.stringify(formInputs),
             headers: {
@@ -36,6 +38,8 @@ export const Login = () => {
                         })
                     }
                 }
+            } else if (error instanceof LoginError) {
+                setLoginError('メールアドレスかパスワードが間違っています')
             }
         })
     };
@@ -43,6 +47,7 @@ export const Login = () => {
     return (
         <Container maxWidth="xs" sx={{mt: 10}}>
             <Stack spacing={2} component="form" onSubmit={handleSubmit(onSubmit)}>
+                {loginError && <Alert severity="error">{loginError}</Alert>}
                 <Controller
                     name="email"
                     control={control}
