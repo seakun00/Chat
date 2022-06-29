@@ -5,19 +5,20 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Chat extends Model
+class ChatAdmin extends Model
 {
     protected $casts = [
         'id' => 'int',
-        'name' => 'string',
+        'chat_id' => 'int',
+        'user_id' => 'int',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
-    public function chatAdmins(): HasMany
+    public function chat(): BelongsTo
     {
-        return $this->hasMany(ChatAdmin::class);
+        return $this->belongsTo(Chat::class);
     }
 }
