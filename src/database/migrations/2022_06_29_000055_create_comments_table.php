@@ -10,17 +10,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('chat_logs', static function (Blueprint $table) {
+        Schema::create('comments', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('chat_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->string('comment_type');
+            $table->string('type');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('chat_logs');
+        Schema::dropIfExists('comments');
     }
 };

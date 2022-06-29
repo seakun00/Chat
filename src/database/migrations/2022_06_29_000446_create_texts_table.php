@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('texts', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('chat_log_id')->constrained();
+            $table->foreignId('comment_id')->constrained();
             $table->text('text');
             $table->timestamps();
         });
