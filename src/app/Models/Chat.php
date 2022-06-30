@@ -20,4 +20,9 @@ class Chat extends Model
     {
         return $this->hasMany(ChatAdmin::class);
     }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

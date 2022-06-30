@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class ChatAdmin extends Model
+class Comment extends Model
 {
     protected $casts = [
         'id' => 'int',
         'chat_id' => 'int',
         'user_id' => 'int',
+        'type' => 'string',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
