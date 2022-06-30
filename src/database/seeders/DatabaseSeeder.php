@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ChatSeeder::class,
             ChatAdminSeeder::class,
+            CommentSeeder::class,
         ]);
     }
 }
