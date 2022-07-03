@@ -20,7 +20,7 @@ Route::get('/logout', [AuthenticationController::class, 'logout'])
     ->name('logout');
 Route::post('/api/authenticate', [AuthenticationController::class, 'authenticate'])
     ->name('authenticate');
-Route::get('/chat', [\App\Http\Controllers\ChatController::class, 'index'])
+Route::get('/api/chats', [\App\Http\Controllers\ChatController::class, 'index'])
     ->middleware('auth')
     ->name('chat.index');
 Route::get('/{any}', static function () {

@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
+use App\Models\Chat;
+use Illuminate\Http\JsonResponse;
 
 class ChatController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): JsonResponse
     {
-        return view('chat.index');
+        // TODO: ページングを追加する
+        return response()->json(Chat::all());
     }
 }
