@@ -15,5 +15,9 @@ class ChatSeeder extends Seeder
             'id' => 1,
             'name' => '今日の晩御飯を考える主婦の会',
         ]);
+
+        Chat::factory()
+            ->count(30)
+            ->create();
     }
 }
