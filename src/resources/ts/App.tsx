@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "@/ts/Login";
-import { Chats } from "@/ts/Chat/Chats";
+import { Chats } from "@/ts/chat/Chats";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 export const App = () => (
