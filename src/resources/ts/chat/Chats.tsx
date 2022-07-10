@@ -13,7 +13,6 @@ import { Pagination } from "@/ts/layout/Pagination";
 import { usePagination } from "@/ts/hooks/usePagination";
 
 export const Chats = () => {
-    // TODO: クエリパラメータからも初期化できるようにしたい
     const { rows, page, setPage } = usePagination();
     const { data, isLoading } = useQuery<ChatList, Error>(
         ['chats', page],
