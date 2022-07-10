@@ -1,6 +1,6 @@
-import {createError} from "@/ts/http/error/errorFactory";
+import { createError } from "@/ts/http/error/errorFactory";
 
-export const client = (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => (
+export const client = <T>(input: RequestInfo | URL, init?: RequestInit): Promise<T> => (
     fetch(input, init)
         .then(async (data) => {
             if (data.ok) return data.json()
