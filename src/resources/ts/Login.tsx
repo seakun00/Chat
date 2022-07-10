@@ -29,7 +29,7 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             },
         }).then((data) => {
-            // todo: ログイン後にリダイレクトするページが実装できていないので、リダイレクト処理は別PRで実装する。
+            window.location.href = '/chats';
         }).catch((error) => {
             if (error instanceof ValidationError) {
                 for (const key in error.userMessages) {
