@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom";
 
 export const Header = () => {
     const location = useLocation();
-    console.log(location);
 
     // 現状ログインフォーム以外は認証が必要なので、パスを見てログアウトボタンを表示するか判定する。
     return (
