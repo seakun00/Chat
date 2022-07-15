@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import {Alert, Button, Container, Stack, TextField} from "@mui/material";
+import { Alert, Container, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { ValidationError } from "@/ts/http/error/ValidationError";
 import { client, getCsrfToken } from "@/ts/http/client";
 import { LoginError } from "@/ts/http/error/LoginError";
+import { useNavigate } from "react-router-dom";
+import { LoadingButton } from "@mui/lab";
 
 type FormInputs = {
     _token: string | null;
@@ -12,12 +14,13 @@ type FormInputs = {
 }
 
 export const Login = () => {
-    const { control, handleSubmit, setError, formState: { errors } } = useForm<FormInputs>({
+    const { control, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<FormInputs>({
         defaultValues: {
             email: '',
             password: '',
         }
     });
+    const navigate = useNavigate();
     const [loginError, setLoginError] = useState<string|null>();
 
     const onSubmit = (formInputs: FormInputs) => {
@@ -29,7 +32,7 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             },
         }).then((data) => {
-            window.location.href = '/chats';
+            navigate('/chats');
         }).catch((error) => {
             if (error instanceof ValidationError) {
                 for (const key in error.userMessages) {
@@ -47,7 +50,7 @@ export const Login = () => {
     };
 
     return (
-        <Container maxWidth="xs" sx={{mt: 10}}>
+        <Container component="div" maxWidth="xs" sx={{mt: 10}}>
             <Stack spacing={2} component="form" onSubmit={handleSubmit(onSubmit)}>
                 {loginError && <Alert severity="error">{loginError}</Alert>}
                 <Controller
@@ -76,7 +79,13 @@ export const Login = () => {
                         />
                     )}
                 />
-                <Button type="submit" variant="contained">ログイン</Button>
+                <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    loading={isSubmitting}
+                >
+                    ログイン
+                </LoadingButton>
             </Stack>
         </Container>
     )
