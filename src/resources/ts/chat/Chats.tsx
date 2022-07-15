@@ -1,16 +1,17 @@
 import React from "react";
 import {
-    CircularProgress,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
+    Stack,
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { ChatList, getChats } from "@/ts/http/chat";
 import { ErrorAlert } from "@/ts/layout/Error";
 import { Pagination } from "@/ts/layout/Pagination";
 import { usePagination } from "@/ts/hooks/usePagination";
+import { Loading } from "@/ts/layout/Loading";
 
 export const Chats = () => {
     const { rows, page, setPage } = usePagination();
@@ -23,10 +24,10 @@ export const Chats = () => {
     );
 
     if (isLoading) {
-        return <CircularProgress />;
+        return <Loading />;
     } else if (data) {
         return (
-            <>
+            <Stack justifyContent="center" alignItems="center" spacing={2}>
                 <List>
                     {data.chats.map((chat, index) => (
                         <ListItem disablePadding key={index}>
@@ -42,7 +43,7 @@ export const Chats = () => {
                     page={page}
                     onChangePage={setPage}
                 />
-            </>
+            </Stack>
         );
     } else {
         return <ErrorAlert />;
