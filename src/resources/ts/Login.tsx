@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import {Alert, Button, Container, Stack, TextField} from "@mui/material";
+import { Alert, Button, Container, Stack, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { ValidationError } from "@/ts/http/error/ValidationError";
 import { client, getCsrfToken } from "@/ts/http/client";
 import { LoginError } from "@/ts/http/error/LoginError";
+import { useNavigate } from "react-router-dom";
 
 type FormInputs = {
     _token: string | null;
@@ -18,6 +19,7 @@ export const Login = () => {
             password: '',
         }
     });
+    const navigate = useNavigate();
     const [loginError, setLoginError] = useState<string|null>();
 
     const onSubmit = (formInputs: FormInputs) => {
@@ -29,7 +31,7 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             },
         }).then((data) => {
-            window.location.href = '/chats';
+            navigate('/chats');
         }).catch((error) => {
             if (error instanceof ValidationError) {
                 for (const key in error.userMessages) {
@@ -47,7 +49,7 @@ export const Login = () => {
     };
 
     return (
-        <Container maxWidth="xs" sx={{mt: 10}}>
+        <Container component="div" maxWidth="xs" sx={{mt: 10}}>
             <Stack spacing={2} component="form" onSubmit={handleSubmit(onSubmit)}>
                 {loginError && <Alert severity="error">{loginError}</Alert>}
                 <Controller
