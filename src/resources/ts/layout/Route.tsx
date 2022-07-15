@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import { Header } from "@/ts/layout/Header";
-import {Container, CssBaseline, Grid} from "@mui/material";
+import { Container, CssBaseline } from "@mui/material";
 
 export const Route = (props: RouteProps) => (
     <Routes>
