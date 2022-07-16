@@ -31,7 +31,7 @@ export const Chats = () => {
                 <List>
                     {data.chats.map((chat, index) => (
                         <ListItem disablePadding key={index}>
-                            <ListItemButton>
+                            <ListItemButton component="a" href={`/chats/${chat.id}`}>
                                 <ListItemText primary={chat.name} />
                             </ListItemButton>
                         </ListItem>

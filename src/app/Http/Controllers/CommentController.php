@@ -5,15 +5,19 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class ChatController extends Controller
+class CommentController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function __construct(private CommentRepository $commentRepository)
     {
-        // TODO: offsetとlimitをFormRequestで検証する
-        $query = Chat::query();
+    }
+
+    public function index(Request $request, Chat $chat): JsonResponse
+    {
+        $query = $this->commentRepository->getByChatAsBuilder($chat);
         $count = $query->count();
 
         if ($request->has('offset')) {
@@ -23,15 +27,10 @@ class ChatController extends Controller
             $query->limit($request->get('limit'));
         }
 
-        $chats = $query->get();
+        $comments = $query->get();
         return response()->json([
-            'chats' => $chats,
+            'comments' => $comments,
             'count' => $count,
         ]);
-    }
-
-    public function detail(Request $request, Chat $chat): JsonResponse
-    {
-        return response()->json($chat);
     }
 }
