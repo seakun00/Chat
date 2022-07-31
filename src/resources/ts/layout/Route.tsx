@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import { Header } from "@/ts/layout/Header";
-import { Container, CssBaseline } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 
 export const Route = (props: RouteProps) => (
     <Routes>
@@ -15,7 +15,8 @@ export const Route = (props: RouteProps) => (
                 <>
                     <CssBaseline />
                     <Header />
-                    <Container component="main" sx={{mt: 2}}>
+                    <Spacer />
+                    <Container component="main">
                         {props.element}
                     </Container>
                 </>
@@ -23,3 +24,5 @@ export const Route = (props: RouteProps) => (
         />
     </Routes>
 );
+
+const Spacer = () => <Box sx={(theme) => ({...theme.mixins.toolbar})} />;
