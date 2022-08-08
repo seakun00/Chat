@@ -20,8 +20,11 @@ class CommentController extends Controller
         $query = $this->commentRepository->getByChatAsBuilder($chat);
 
         $count = $query->count();
-        $comments = $query->offset($request->get('offset'))
-            ->limit($request->get('limit'))
+
+        $offset = $request->get('offset');
+        $limit = $request->get('limit');
+        $comments = $query->offset($offset)
+            ->limit($limit)
             ->get();
 
         return response()->json([

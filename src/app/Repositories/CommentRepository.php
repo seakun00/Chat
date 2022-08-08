@@ -15,9 +15,11 @@ class CommentRepository
         return Comment::select([
             'comments.id',
             'comments.type',
+            'comments.created_at',
             'texts.text',
         ])
             ->whereChatId($chat->id)
-            ->leftJoin('texts', 'texts.comment_id', '=', 'comments.id');
+            ->leftJoin('texts', 'texts.comment_id', '=', 'comments.id')
+            ->orderBy('comments.id', 'desc');
     }
 }

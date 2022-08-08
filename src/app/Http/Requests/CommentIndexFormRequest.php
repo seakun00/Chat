@@ -11,8 +11,8 @@ class CommentIndexFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'offset' => ['required', 'numeric'],
             'limit' => ['required', 'numeric'],
+            'offset' => ['required', 'numeric'],
         ];
     }
 }
