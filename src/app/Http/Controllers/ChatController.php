@@ -12,6 +12,7 @@ class ChatController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        // TODO: offsetとlimitをFormRequestで検証する
         $query = Chat::query();
         $count = $query->count();
 
@@ -27,5 +28,10 @@ class ChatController extends Controller
             'chats' => $chats,
             'count' => $count,
         ]);
+    }
+
+    public function detail(Request $request, Chat $chat): JsonResponse
+    {
+        return response()->json($chat);
     }
 }

@@ -5,7 +5,7 @@ export type ChatList = {
     chats: Chat[],
 }
 
-type Chat = {
+export type Chat = {
     id: number;
     name: string;
 }
@@ -16,6 +16,12 @@ export const getChats = (limit: number, offset: number): Promise<ChatList> => {
         'limit': limit.toString(),
     })
     return client('/api/chats?' + params, {
+        method: 'GET',
+    });
+}
+
+export const getChat = (id: number): Promise<Chat> => {
+    return client('/api/chats/' + id, {
         method: 'GET',
     });
 }

@@ -13,7 +13,7 @@ export const Header = () => {
 
     // 現状ログインフォーム以外は認証が必要なので、パスを見てログアウトボタンを表示するか判定する。
     return (
-        <AppBar position="relative">
+        <AppBar>
             <Container>
                 <Toolbar>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
