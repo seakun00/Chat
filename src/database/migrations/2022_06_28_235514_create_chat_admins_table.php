@@ -14,7 +14,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('chat_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
