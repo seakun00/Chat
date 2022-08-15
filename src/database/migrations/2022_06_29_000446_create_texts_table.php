@@ -14,7 +14,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('comment_id')->constrained();
             $table->text('text');
-            $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
