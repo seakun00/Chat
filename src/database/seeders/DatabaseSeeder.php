@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ChatSeeder::class,
             ChatAdminSeeder::class,
+            ChatBookmarkSeeder::class,
             CommentSeeder::class,
             TextSeeder::class,
         ]);
