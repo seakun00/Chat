@@ -13,6 +13,7 @@ class ChatIndexRequest extends FormRequest
         return [
             'limit' => ['required', 'numeric'],
             'offset' => ['required', 'numeric'],
+            'name' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

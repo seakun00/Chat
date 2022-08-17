@@ -17,7 +17,7 @@ import { Loading } from "@/ts/layout/Loading";
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Chats = () => {
-    const [name, setName] = useState<string>();
+    const [name, setName] = useState("");
     const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && event.target instanceof HTMLInputElement) {
             setName(event.target.value)
@@ -43,7 +43,7 @@ const SearchBar = (props: TextFieldProps) => (
     />
 );
 
-const List = (props: {name?: string}) => {
+const List = (props: {name: string}) => {
     const { rows, page, setPage } = usePagination();
     const { isLoading, data } = useQuery<ChatList, Error>(
         ['chats', page, props.name],

@@ -15,6 +15,11 @@ class ChatController extends Controller
     {
         $query = Chat::query();
 
+        $name = $request->get('name');
+        if ($name) {
+            $query->where('name', 'like', "%$name%");
+        }
+
         $count = $query->count();
 
         $offset = $request->get('offset');
