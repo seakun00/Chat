@@ -1,11 +1,12 @@
-import React from "react";
+import React, { KeyboardEvent, useState } from "react";
 import {
-    List,
+    List as BaseList,
     ListItem,
     ListItemButton,
     ListItemText,
     Stack,
     TextField,
+    TextFieldProps,
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { ChatList, getChats } from "@/ts/http/chat";
@@ -16,12 +17,39 @@ import { Loading } from "@/ts/layout/Loading";
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Chats = () => {
+    const [name, setName] = useState<string>();
+    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && event.target instanceof HTMLInputElement) {
+            setName(event.target.value)
+        }
+    }
+
+    return (
+        <Stack justifyContent="center" alignItems="center" spacing={2}>
+            <SearchBar onKeyDown={handleSearch} />
+            <List name={name} />
+        </Stack>
+    );
+};
+
+const SearchBar = (props: TextFieldProps) => (
+    <TextField
+        {...props}
+        variant="standard"
+        margin="normal"
+        InputProps={{
+            startAdornment: <SearchIcon />
+        }}
+    />
+);
+
+const List = (props: {name?: string}) => {
     const { rows, page, setPage } = usePagination();
-    const { data, isLoading } = useQuery<ChatList, Error>(
-        ['chats', page],
+    const { isLoading, data } = useQuery<ChatList, Error>(
+        ['chats', page, props.name],
         () => {
             const offset = rows * (page - 1)
-            return getChats(rows, offset)
+            return getChats(rows, offset, props.name)
         }
     );
 
@@ -29,15 +57,8 @@ export const Chats = () => {
         return <Loading />;
     } else if (data) {
         return (
-            <Stack justifyContent="center" alignItems="center" spacing={2}>
-                <TextField
-                    variant="standard"
-                    margin="normal"
-                    InputProps={{
-                        startAdornment: <SearchIcon />
-                    }}
-                />
-                <List>
+            <>
+                <BaseList>
                     {data.chats.map((chat, index) => (
                         <ListItem disablePadding key={index}>
                             <ListItemButton component="a" href={`/chats/${chat.id}`}>
@@ -45,16 +66,16 @@ export const Chats = () => {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                </List>
+                </BaseList>
                 <Pagination
                     total={data.count}
                     rows={rows}
                     page={page}
                     onChangePage={setPage}
                 />
-            </Stack>
-        );
+            </>
+        )
     } else {
         return <ErrorAlert />;
     }
-};
+}
