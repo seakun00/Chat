@@ -5,6 +5,7 @@ import {
     ListItemButton,
     ListItemText,
     Stack,
+    TextField,
 } from "@mui/material";
 import { useQuery } from "react-query";
 import { ChatList, getChats } from "@/ts/http/chat";
@@ -12,6 +13,7 @@ import { ErrorAlert } from "@/ts/layout/Error";
 import { Pagination } from "@/ts/layout/Pagination";
 import { usePagination } from "@/ts/hooks/usePagination";
 import { Loading } from "@/ts/layout/Loading";
+import SearchIcon from '@mui/icons-material/Search';
 
 export const Chats = () => {
     const { rows, page, setPage } = usePagination();
@@ -28,6 +30,13 @@ export const Chats = () => {
     } else if (data) {
         return (
             <Stack justifyContent="center" alignItems="center" spacing={2}>
+                <TextField
+                    variant="standard"
+                    margin="normal"
+                    InputProps={{
+                        startAdornment: <SearchIcon />
+                    }}
+                />
                 <List>
                     {data.chats.map((chat, index) => (
                         <ListItem disablePadding key={index}>
