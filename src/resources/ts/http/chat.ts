@@ -10,11 +10,13 @@ export type Chat = {
     name: string;
 }
 
-export const getChats = (limit: number, offset: number): Promise<ChatList> => {
+export const getChats = (limit: number, offset: number, name: string): Promise<ChatList> => {
     const params = new URLSearchParams({
         'offset': offset.toString(),
         'limit': limit.toString(),
+        'name': name,
     })
+
     return client('/api/chats?' + params, {
         method: 'GET',
     });

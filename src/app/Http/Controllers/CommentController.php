@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentIndexFormRequest;
+use App\Http\Requests\CommentIndexRequest;
 use App\Models\Chat;
 use App\Repositories\CommentRepository;
 use Illuminate\Http\JsonResponse;
@@ -15,7 +15,7 @@ class CommentController extends Controller
     {
     }
 
-    public function index(CommentIndexFormRequest $request, Chat $chat): JsonResponse
+    public function index(CommentIndexRequest $request, Chat $chat): JsonResponse
     {
         $query = $this->commentRepository->getByChatAsBuilder($chat);
 

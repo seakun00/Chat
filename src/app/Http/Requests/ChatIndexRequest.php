@@ -6,13 +6,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CommentIndexFormRequest extends FormRequest
+class ChatIndexRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
             'limit' => ['required', 'numeric'],
             'offset' => ['required', 'numeric'],
+            'name' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

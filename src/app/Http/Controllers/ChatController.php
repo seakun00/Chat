@@ -4,26 +4,30 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChatIndexRequest;
 use App\Models\Chat;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(ChatIndexRequest $request): JsonResponse
     {
-        // TODO: offsetとlimitをFormRequestで検証する
         $query = Chat::query();
+
+        $name = $request->get('name');
+        if ($name) {
+            $query->where('name', 'like', "%$name%");
+        }
+
         $count = $query->count();
 
-        if ($request->has('offset')) {
-            $query->offset($request->get('offset'));
-        }
-        if ($request->has('limit')) {
-            $query->limit($request->get('limit'));
-        }
+        $offset = $request->get('offset');
+        $limit = $request->get('limit');
+        $chats = $query->offset($offset)
+            ->limit($limit)
+            ->get();
 
-        $chats = $query->get();
         return response()->json([
             'chats' => $chats,
             'count' => $count,
