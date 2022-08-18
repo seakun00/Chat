@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ChatBookmarkController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,9 @@ Route::prefix('api')->group(static function () {
     Route::get('/chats/{chat}/comments', [CommentController::class, 'index'])
         ->middleware('auth')
         ->name('comment.index');
+    Route::get('/chat_bookmarks', [ChatBookmarkController::class, 'index'])
+        ->middleware('auth')
+        ->name('chat_bookmarks.index');
 });
 Route::get('/{any}', static function () {
     return view('index');
