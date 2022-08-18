@@ -16,7 +16,7 @@ export const Route = (props: RouteProps) => (
                     <CssBaseline />
                     <Header />
                     <Spacer />
-                    <Container component="main">
+                    <Container component="main" maxWidth={false}>
                         {props.element}
                     </Container>
                 </>
