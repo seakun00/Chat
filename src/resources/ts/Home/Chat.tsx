@@ -23,9 +23,7 @@ export const Chat = () => {
     return (
         <Stack
             spacing={2}
-            sx={theme => ({
-                height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`
-            })}
+            sx={{height: "100%"}}
         >
             <Comments />
         </Stack>

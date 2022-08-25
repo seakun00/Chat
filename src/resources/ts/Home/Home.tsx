@@ -6,7 +6,13 @@ import { Chat } from "@/ts/Home/Chat";
 
 export const Home = () => (
     <ChatIdProvider>
-        <Grid container spacing={2}>
+        <Grid
+            container
+            spacing={2}
+            sx={theme => ({
+                height: `calc(100% - ${theme.mixins.toolbar}px)`
+            })}
+        >
             <Grid item xs={4}>
                 <ChatBookmarks />
             </Grid>
