@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react";
 import { Grid } from "@mui/material";
 import { ChatBookmarks } from "@/ts/Home/ChatBookmarks";
 import { ChatIdProvider } from "@/ts/Home/ChatIdProvider";
+import { Chat } from "@/ts/Home/Chat";
 
 export const Home = () => {
     return (
@@ -11,7 +12,7 @@ export const Home = () => {
                     <ChatBookmarks />
                 </Grid>
                 <Grid item xs={8}>
-                    <h1>コメント一覧を追加する予定</h1>
+                    <Chat />
                 </Grid>
             </Grid>
         </ChatIdProvider>
