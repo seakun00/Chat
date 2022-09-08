@@ -9,9 +9,11 @@ export const Home = () => (
         <Grid
             container
             spacing={2}
-            sx={theme => ({
-                height: `calc(100% - ${theme.mixins.toolbar}px)`
-            })}
+            sx={{
+                // Grid containerでmargin topに-16pxが設定されるので調整してる
+                // https://stackoverflow.com/questions/50416346/grid-with-negative-margin-top-break-my-ui
+                height: `calc(100% + 16px)`,
+            }}
         >
             <Grid item xs={4}>
                 <ChatBookmarks />
