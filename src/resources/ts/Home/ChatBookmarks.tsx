@@ -12,7 +12,7 @@ import { ChatIdContext } from "@/ts/Home/ChatIdProvider";
 
 export const ChatBookmarks = () => {
     const { isLoading, data } = useQuery<ChatBookmark[], Error>('chat_bookmarks', getChatBookmarks);
-    const { setChatId } = useContext(ChatIdContext);
+    const { chatId, setChatId } = useContext(ChatIdContext);
 
     if (isLoading) {
         return <Loading />;
@@ -20,9 +20,26 @@ export const ChatBookmarks = () => {
         return (
             <List>
                 {data.map((chatBookmark) => (
-                    <ListItem disablePadding key={chatBookmark.id}>
+                    <ListItem
+                        key={chatBookmark.id}
+                        disablePadding
+                        dense
+                        sx={[
+                            chatBookmark.id === chatId && {
+                                backgroundColor: "cornflowerblue",
+                            }
+                        ]}
+                    >
                         <ListItemButton onClick={() => setChatId(chatBookmark.chat_id)}>
-                            <ListItemText primary={chatBookmark.name} />
+                            <ListItemText
+                                primary={chatBookmark.name}
+                                primaryTypographyProps={{
+                                    sx: {
+                                        fontSize: "15px",
+                                        fontWeight: "bold",
+                                    }
+                                }}
+                            />
                         </ListItemButton>
                     </ListItem>
                 ))}
