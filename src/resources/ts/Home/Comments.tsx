@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemText } from "@mui/material";
 import React, { UIEvent, useContext, useEffect, useRef, useState } from "react";
-import { useGetComments } from "@/ts/chat/useGetComments";
+import { useGetComments } from "@/ts/Chat/useGetComments";
 import { ChatIdContext } from "@/ts/Home/ChatIdProvider";
 
 export const Comments = () => {
