@@ -32,7 +32,7 @@ export const Login = () => {
                 'Content-Type': 'application/json'
             },
         }).then((data) => {
-            navigate('/chats');
+            navigate('/');
         }).catch((error) => {
             if (error instanceof ValidationError) {
                 for (const key in error.userMessages) {

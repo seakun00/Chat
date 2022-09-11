@@ -1,10 +1,10 @@
 import { List, ListItem, ListItemText } from "@mui/material";
-import React, {UIEvent, useEffect, useRef, useState} from "react";
-import { useParams } from "react-router-dom";
+import React, { UIEvent, useContext, useEffect, useRef, useState } from "react";
 import { useGetComments } from "@/ts/chat/useGetComments";
+import { ChatIdContext } from "@/ts/Home/ChatIdProvider";
 
 export const Comments = () => {
-    const { id: chatId } = useParams<{ id: string }>()
+    const { chatId } = useContext(ChatIdContext);
     const [offset, setOffset] = useState(0);
     const comments = useGetComments(Number(chatId), 30, offset);
 

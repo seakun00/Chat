@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { Chat as ChatType, getChat } from "@/ts/http/chat";
-import { useParams } from "react-router-dom";
 import { Stack } from "@mui/material";
-import { Comments } from "@/ts/chat/Comments";
+import { Comments } from "@/ts/Home/Comments";
+import { ChatIdContext } from "@/ts/Home/ChatIdProvider";
 
 export const Chat = () => {
-    const { id: chatId } = useParams<{ id: string }>()
+    const { chatId } = useContext(ChatIdContext);
+    if (chatId === undefined) {
+        return (
+            <p>TODO:チャット一覧ページのリンクを追加する</p>
+        );
+    }
+
     const chat = useQuery<ChatType, Error>(
         ['chat', chatId],
         () => {
@@ -17,9 +23,7 @@ export const Chat = () => {
     return (
         <Stack
             spacing={2}
-            sx={theme => ({
-                height: `calc(100% - ${theme.mixins.toolbar.minHeight}px)`
-            })}
+            sx={{height: "100%"}}
         >
             <Comments />
         </Stack>
