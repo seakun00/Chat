@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { ChatBookmarks } from "@/ts/Home/ChatBookmarks";
 import { ChatIdProvider } from "@/ts/Home/ChatIdProvider";
 import { Chat } from "@/ts/Home/Chat";
+import { main } from "@/ts/layout/color";
 
 export const Home = () => (
     <ChatIdProvider>
@@ -15,11 +16,18 @@ export const Home = () => (
                 height: `calc(100% + 16px)`,
             }}
         >
-            <Grid item xs={4}>
-                <ChatBookmarks />
+            <Grid
+                item
+                xs={2}
+                sx={{
+                    backgroundColor: main,
+                    color: "white",
+                }}
+            >
+                <ChatBookmarks/>
             </Grid>
-            <Grid item xs={8}>
-                <Chat />
+            <Grid item xs={10}>
+                <Chat/>
             </Grid>
         </Grid>
     </ChatIdProvider>
