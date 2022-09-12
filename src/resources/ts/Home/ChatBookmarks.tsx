@@ -3,12 +3,17 @@ import { useQuery } from "react-query";
 import { ChatBookmark, getChatBookmarks } from "@/ts/http/chatBookmarks";
 import { Loading } from "@/ts/layout/Loading";
 import {
+    IconButton,
     List,
     ListItem,
     ListItemButton,
     ListItemText,
-} from "@mui/material";import {ErrorAlert} from "@/ts/layout/Error";
+    ListSubheader,
+} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import { ErrorAlert } from "@/ts/layout/Error";
 import { ChatIdContext } from "@/ts/Home/ChatIdProvider";
+import { main } from "@/ts/layout/color";
 
 export const ChatBookmarks = () => {
     const { isLoading, data } = useQuery<ChatBookmark[], Error>('chat_bookmarks', getChatBookmarks);
@@ -19,6 +24,7 @@ export const ChatBookmarks = () => {
     } else if (data) {
         return (
             <List>
+                <ListHeader />
                 {data.map((chatBookmark) => (
                     <ListItem
                         key={chatBookmark.id}
@@ -49,3 +55,33 @@ export const ChatBookmarks = () => {
         return <ErrorAlert />;
     }
 }
+
+const ListHeader = () => (
+    <ListSubheader
+        sx={{
+            height: "40px",
+            color: "lightgray",
+            backgroundColor: main,
+            fontSize: "15px",
+            fontWeight: "bold",
+        }}
+    >
+        <ListItem
+            secondaryAction={
+                <IconButton
+                    edge="end"
+                    href="/chats"
+                >
+                    <AddIcon
+                        sx={{
+                            color: "lightgray",
+                        }}
+                    />
+                </IconButton>
+            }
+            disableGutters
+        >
+            <ListItemText primary="ブックマーク"/>
+        </ListItem>
+    </ListSubheader>
+);
