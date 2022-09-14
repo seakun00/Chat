@@ -34,4 +34,8 @@ export const Header = () => {
     )
 };
 
-export const Spacer = () => <Box sx={(theme) => ({...theme.mixins.toolbar})} />;
+export const Spacer = () => <Box
+    sx={(theme) => ({
+        backgroundColor: main,
+        ...theme.mixins.toolbar
+    })} />;
