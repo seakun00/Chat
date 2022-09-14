@@ -1,5 +1,6 @@
 import {
     AppBar,
+    Box,
     Button,
     Container,
     Toolbar,
@@ -32,3 +33,9 @@ export const Header = () => {
         </AppBar>
     )
 };
+
+export const Spacer = () => <Box
+    sx={(theme) => ({
+        backgroundColor: main,
+        ...theme.mixins.toolbar
+    })} />;
