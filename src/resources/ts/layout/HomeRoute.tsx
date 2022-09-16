@@ -1,15 +1,11 @@
-import {
-    Routes,
-    Route as BaseRoute,
-    RouteProps,
-} from "react-router-dom";
-import React, {ReactNode} from "react";
-import { Header, Spacer } from "@/ts/layout/Header";
-import {CssBaseline, Grid} from "@mui/material";
-import { useAppBarHeight } from "@/ts/layout/useAppBarHeight";
-import {ChatIdProvider} from "@/ts/Home/ChatIdProvider";
-import {main} from "@/ts/layout/color";
-import {ChatBookmarks} from "@/ts/Home/ChatBookmarks";
+import { Routes, Route as BaseRoute, RouteProps } from 'react-router-dom';
+import React, { ReactNode } from 'react';
+import { Header, Spacer } from '@/ts/layout/Header';
+import { CssBaseline, Grid } from '@mui/material';
+import { useAppBarHeight } from '@/ts/layout/useAppBarHeight';
+import { ChatIdProvider } from '@/ts/Home/ChatIdProvider';
+import { main } from '@/ts/layout/color';
+import { ChatBookmarks } from '@/ts/Home/ChatBookmarks';
 
 export const HomeRoute = (props: RouteProps) => (
     <Routes>
@@ -17,9 +13,9 @@ export const HomeRoute = (props: RouteProps) => (
             {...props}
             element={
                 <>
-                    <CssBaseline/>
-                    <Header/>
-                    <Spacer/>
+                    <CssBaseline />
+                    <Header />
+                    <Spacer />
                     <Home>{props.element}</Home>
                 </>
             }
@@ -27,7 +23,7 @@ export const HomeRoute = (props: RouteProps) => (
     </Routes>
 );
 
-const Home = (props: {children: ReactNode}) => {
+const Home = (props: { children: ReactNode }) => {
     // https://github.com/mui/material-ui/issues/10739
     const appBarMinHeight = useAppBarHeight();
 
@@ -40,17 +36,19 @@ const Home = (props: {children: ReactNode}) => {
             <Grid
                 container
                 spacing={2}
-                sx={{ height: `calc(100vh - ${appBarMinHeight}px + ${fixGridContainerMarginTopPx}px)` }}
+                sx={{
+                    height: `calc(100vh - ${appBarMinHeight}px + ${fixGridContainerMarginTopPx}px)`,
+                }}
             >
                 <Grid
                     item
                     xs={2}
                     sx={{
                         backgroundColor: main,
-                        color: "white",
+                        color: 'white',
                     }}
                 >
-                    <ChatBookmarks/>
+                    <ChatBookmarks />
                 </Grid>
                 <Grid item xs={10}>
                     {props.children}
@@ -58,4 +56,4 @@ const Home = (props: {children: ReactNode}) => {
             </Grid>
         </ChatIdProvider>
     );
-}
+};

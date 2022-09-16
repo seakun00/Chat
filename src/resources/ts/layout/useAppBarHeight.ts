@@ -1,7 +1,7 @@
 import { useMediaQuery, useTheme } from '@mui/material';
 
 type MinHeight = {
-    minHeight: number,
+    minHeight: number;
 };
 
 export const useAppBarHeight = (): number => {
@@ -11,7 +11,9 @@ export const useAppBarHeight = (): number => {
     } = useTheme();
 
     const toolbarDesktopQuery = breakpoints.up('sm');
-    const toolbarLandscapeQuery = `${breakpoints.up('xs')} and (orientation: landscape)`;
+    const toolbarLandscapeQuery = `${breakpoints.up(
+        'xs'
+    )} and (orientation: landscape)`;
     const isDesktop = useMediaQuery(toolbarDesktopQuery);
     const isLandscape = useMediaQuery(toolbarLandscapeQuery);
 
@@ -24,4 +26,4 @@ export const useAppBarHeight = (): number => {
         currentToolbarMinHeight = toolbar;
     }
     return (currentToolbarMinHeight as MinHeight).minHeight;
-}
+};
