@@ -9,8 +9,6 @@
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
-    "overrides": [
-    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -20,6 +18,4 @@
         "react",
         "@typescript-eslint"
     ],
-    "rules": {
-    }
 }
