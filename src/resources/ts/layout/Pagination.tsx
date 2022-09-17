@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
     Pagination as BasePagination,
     PaginationProps as BasePaginationProps,
-} from "@mui/material";
+} from '@mui/material';
 
 type PaginationProps = BasePaginationProps & {
     rows: number;
     total: number;
     onChangePage: (page: number) => void;
-}
+};
 
 export const Pagination = (props: PaginationProps) => {
     const count = Math.ceil(props.total / props.rows);

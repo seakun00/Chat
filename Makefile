@@ -20,3 +20,7 @@ build:
 	docker-compose exec web npm run build
 watch:
 	docker-compose exec web npm run watch
+eslint:
+	docker-compose exec web npx eslint --fix './resources/ts/**/*.{ts,tsx}'
+prettier:
+	docker-compose exec web npx prettier --write './resources/**/*.{ts,tsx}'

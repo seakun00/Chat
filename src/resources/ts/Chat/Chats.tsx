@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from "react";
+import React, { KeyboardEvent, useState } from 'react';
 import {
     List as BaseList,
     ListItem,
@@ -7,22 +7,22 @@ import {
     Stack,
     TextField,
     TextFieldProps,
-} from "@mui/material";
-import { useQuery } from "react-query";
-import { ChatList, getChats } from "@/ts/http/chat";
-import { ErrorAlert } from "@/ts/layout/Error";
-import { Pagination } from "@/ts/layout/Pagination";
-import { usePagination } from "@/ts/hooks/usePagination";
-import { Loading } from "@/ts/layout/Loading";
+} from '@mui/material';
+import { useQuery } from 'react-query';
+import { ChatList, getChats } from '@/ts/http/chat';
+import { ErrorAlert } from '@/ts/layout/Error';
+import { Pagination } from '@/ts/layout/Pagination';
+import { usePagination } from '@/ts/hooks/usePagination';
+import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Chats = () => {
-    const [name, setName] = useState("");
+    const [name, setName] = useState('');
     const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && event.target instanceof HTMLInputElement) {
-            setName(event.target.value)
+            setName(event.target.value);
         }
-    }
+    };
 
     return (
         <Stack justifyContent="center" alignItems="center" spacing={2}>
@@ -38,18 +38,18 @@ const SearchBar = (props: TextFieldProps) => (
         variant="standard"
         margin="normal"
         InputProps={{
-            startAdornment: <SearchIcon />
+            startAdornment: <SearchIcon />,
         }}
     />
 );
 
-const List = (props: {name: string}) => {
+const List = (props: { name: string }) => {
     const { rows, page, setPage } = usePagination();
     const { isLoading, data } = useQuery<ChatList, Error>(
         ['chats', page, props.name],
         () => {
-            const offset = rows * (page - 1)
-            return getChats(rows, offset, props.name)
+            const offset = rows * (page - 1);
+            return getChats(rows, offset, props.name);
         }
     );
 
@@ -61,7 +61,10 @@ const List = (props: {name: string}) => {
                 <BaseList>
                     {data.chats.map((chat, index) => (
                         <ListItem disablePadding key={index}>
-                            <ListItemButton component="a" href={`/chats/${chat.id}`}>
+                            <ListItemButton
+                                component="a"
+                                href={`/chats/${chat.id}`}
+                            >
                                 <ListItemText primary={chat.name} />
                             </ListItemButton>
                         </ListItem>
@@ -74,8 +77,8 @@ const List = (props: {name: string}) => {
                     onChangePage={setPage}
                 />
             </>
-        )
+        );
     } else {
         return <ErrorAlert />;
     }
-}
+};

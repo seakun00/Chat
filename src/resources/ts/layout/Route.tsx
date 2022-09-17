@@ -1,11 +1,7 @@
-import {
-    Routes,
-    Route as BaseRoute,
-    RouteProps,
-} from "react-router-dom";
-import React from "react";
-import {Header, Spacer} from "@/ts/layout/Header";
-import { Container, CssBaseline } from "@mui/material";
+import { Routes, Route as BaseRoute, RouteProps } from 'react-router-dom';
+import React from 'react';
+import { Header, Spacer } from '@/ts/layout/Header';
+import { Container, CssBaseline } from '@mui/material';
 
 export const Route = (props: RouteProps) => (
     <Routes>
@@ -13,14 +9,10 @@ export const Route = (props: RouteProps) => (
             {...props}
             element={
                 <>
-                    <CssBaseline/>
-                    <Header/>
-                    <Spacer/>
-                    <Container
-                        component="main"
-                        maxWidth={false}
-                        disableGutters
-                    >
+                    <CssBaseline />
+                    <Header />
+                    <Spacer />
+                    <Container component="main" maxWidth={false} disableGutters>
                         {props.element}
                     </Container>
                 </>
