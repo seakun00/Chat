@@ -24,3 +24,7 @@ eslint:
 	docker-compose exec web npx eslint --fix './resources/ts/**/*.{ts,tsx}'
 prettier:
 	docker-compose exec web npx prettier --write './resources/**/*.{ts,tsx}'
+phpcs:
+	docker-compose exec web vendor/bin/phpcs --standard=phpcs.xml .
+phpcbf:
+	docker-compose exec web vendor/bin/phpcbf --standard=phpcs.xml .
