@@ -14,7 +14,9 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '8.1'
-        tools: phpcs
+
+    - name: Init App
+      run: make init
 
     - name: Run phpcs
       run: make phpcs
