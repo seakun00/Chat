@@ -16,6 +16,9 @@ jobs:
         php-version: '8.1'
         extensions: pdo_mysql
 
+    - name: Block TTY error
+      run: export COMPOSE_INTERACTIVE_NO_CLI=1
+
     - name: Init App
       run: make init
 
