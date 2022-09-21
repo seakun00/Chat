@@ -19,5 +19,8 @@ jobs:
     - name: Init App
       run: make init
 
+    - name: Set Laravel env
+      run: cp src/.env.ci src/.env
+
     - name: Run phpcs
       run: make phpcs
