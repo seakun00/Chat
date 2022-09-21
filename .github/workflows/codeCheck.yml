@@ -16,5 +16,7 @@ jobs:
     - name: Init App
       run: make init
 
-    - name: Run phpcs
-      run: make phpcs
+    - name: Run linter
+      run: |
+        make phpcs
+        make eslint
