@@ -16,11 +16,11 @@ jobs:
         php-version: '8.1'
         extensions: pdo_mysql
 
-    - name: Init App
-      run: make init
-
     - name: Set Laravel env
       run: cp src/.env.ci src/.env
+
+    - name: Init App
+      run: make init
 
     - name: Run phpcs
       run: make phpcs
