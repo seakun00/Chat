@@ -13,18 +13,18 @@ fresh:
 sql:
 	docker-compose exec db bash -c 'mysql -u user -ppassword chat'
 composer:
-	docker-compose exec web composer install
+	docker-compose exec -T web composer install
 npm:
-	docker-compose exec web npm install
+	docker-compose exec -T web npm install
 build:
-	docker-compose exec web npm run build
+	docker-compose exec -T web npm run build
 watch:
 	docker-compose exec web npm run watch
 eslint:
-	docker-compose exec web npx eslint --fix './resources/ts/**/*.{ts,tsx}'
+	docker-compose exec -T web npx eslint --fix './resources/ts/**/*.{ts,tsx}'
 prettier:
 	docker-compose exec web npx prettier --write './resources/**/*.{ts,tsx}'
 phpcs:
-	docker-compose exec web vendor/bin/phpcs --standard=phpcs.xml .
+	docker-compose exec -T web vendor/bin/phpcs --standard=phpcs.xml .
 phpcbf:
 	docker-compose exec web vendor/bin/phpcbf --standard=phpcs.xml .
