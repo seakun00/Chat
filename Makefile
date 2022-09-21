@@ -9,7 +9,7 @@ up:
 stop:
 	docker-compose stop
 fresh:
-	docker-compose exec web php artisan migrate:fresh --seed
+	docker-compose exec -T web php artisan migrate:fresh --seed
 sql:
 	docker-compose exec db bash -c 'mysql -u user -ppassword chat'
 composer:
