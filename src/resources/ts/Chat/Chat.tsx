@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // import { useQuery } from 'react-query';
 // import { Chat as ChatType, getChat } from '@/ts/http/chat';
 import { Stack } from '@mui/material';
-import { Comments } from '@/ts/Home/Comments';
+import { Comments } from '@/ts/Chat/Comments';
 import { ChatIdContext } from '@/ts/Home/ChatIdProvider';
 
 export const Chat = () => {

@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route } from '@/ts/layout/Route';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { HomeRoute } from '@/ts/layout/HomeRoute';
-import { Chat } from '@/ts/Home/Chat';
+import { Chat } from '@/ts/Chat/Chat';
 
 export const App = () => {
     const queryClient = new QueryClient();
