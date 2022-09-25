@@ -24,7 +24,9 @@ watch:
 	docker-compose exec web npm run watch
 eslint:
 	docker-compose exec ${CI_OPTION} web npx eslint './resources/ts/**/*.{ts,tsx}'
-prettier:
+eslint-fix:
+	docker-compose exec web npx eslint --fix './resources/ts/**/*.{ts,tsx}'
+prettier-fix:
 	docker-compose exec web npx prettier --write './resources/**/*.{ts,tsx}'
 phpcs:
 	docker-compose exec ${CI_OPTION} web vendor/bin/phpcs --standard=phpcs.xml .
