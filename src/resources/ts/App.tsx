@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Login } from '@/ts/Login';
+import { Login } from '@/ts/Login/Login';
 import { Chats } from '@/ts/Chat/Chats';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Route } from '@/ts/layout/Route';
