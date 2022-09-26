@@ -13,7 +13,6 @@ export const Home = (props: { children: ReactNode }) => {
         <ChatIdProvider>
             <Grid
                 container
-                spacing={2}
                 sx={{
                     height: `calc(100vh - ${appBarMinHeight}px)`,
                 }}
