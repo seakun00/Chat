@@ -9,17 +9,13 @@ export const Home = (props: { children: ReactNode }) => {
     // https://github.com/mui/material-ui/issues/10739
     const appBarMinHeight = useAppBarHeight();
 
-    // Grid containerでmargin topに-16pxが設定されるので調整してる
-    // https://stackoverflow.com/questions/50416346/grid-with-negative-margin-top-break-my-ui
-    const fixGridContainerMarginTopPx = '16';
-
     return (
         <ChatIdProvider>
             <Grid
                 container
                 spacing={2}
                 sx={{
-                    height: `calc(100vh - ${appBarMinHeight}px + ${fixGridContainerMarginTopPx}px)`,
+                    height: `calc(100vh - ${appBarMinHeight}px)`,
                 }}
             >
                 <Grid
