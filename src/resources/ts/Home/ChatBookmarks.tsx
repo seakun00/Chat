@@ -72,6 +72,7 @@ const ListHeader = () => (
         }}
     >
         <ListItem
+            component="div"
             secondaryAction={
                 <IconButton edge="end" href="/chats">
                     <AddIcon
