@@ -1,7 +1,7 @@
 import { client } from '@/ts/http/client';
 
 export type CommentList = {
-    count: number;
+    count: number; // TODO: 使ってなさそうなので削除する
     comments: Comment[];
 };
 
