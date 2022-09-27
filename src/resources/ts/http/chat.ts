@@ -1,10 +1,5 @@
 import { client } from '@/ts/http/client';
 
-export type ChatList = {
-    count: number;
-    chats: Chat[];
-};
-
 export type Chat = {
     id: number;
     name: string;
@@ -14,7 +9,7 @@ export const getChats = (
     limit: number,
     offset: number,
     name: string
-): Promise<ChatList> => {
+): Promise<Chat[]> => {
     const params = new URLSearchParams({
         offset: offset.toString(),
         limit: limit.toString(),

@@ -1,84 +1,152 @@
-import React, { KeyboardEvent, useState } from 'react';
+import React, {
+    KeyboardEvent,
+    UIEvent,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import {
-    List as BaseList,
+    List,
     ListItem,
     ListItemButton,
     ListItemText,
     Stack,
     TextField,
-    TextFieldProps,
 } from '@mui/material';
 import { useQuery } from 'react-query';
-import { ChatList, getChats } from '@/ts/http/chat';
+import { Chat, getChats } from '@/ts/http/chat';
 import { ErrorAlert } from '@/ts/layout/Error';
-import { Pagination } from '@/ts/layout/Pagination';
-import { usePagination } from '@/ts/hooks/usePagination';
 import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const Chats = () => {
+    const rows = 20;
+    const [offset, setOffset] = useState(0);
     const [name, setName] = useState('');
-    const handleSearch = (event: KeyboardEvent<HTMLInputElement>) => {
+    const [chats, setChats] = useState<Chat[]>([]);
+    const { isLoading, isError } = useQuery<Chat[], Error>(
+        ['chats', offset, name],
+        () => {
+            return getChats(rows, offset, name);
+        },
+        {
+            onSuccess: (data) => {
+                const removeDuplicate = (fetchedChats: Chat[]): Chat[] =>
+                    fetchedChats.filter((fetchedChat) => {
+                        const isRegistered = chats.some((chat) => {
+                            return chat.id === fetchedChat.id;
+                        });
+                        return !isRegistered;
+                    });
+
+                const fetchedChats = removeDuplicate(data);
+                setChats([...chats, ...fetchedChats]);
+            },
+        }
+    );
+
+    if (isError) {
+        return <ErrorAlert />
+    } else {
+        return (
+            <Stack spacing={2} sx={{ height: '100%' }}>
+                <SearchBar
+                    setName={setName}
+                    setOffset={setOffset}
+                    setChats={setChats}
+                />
+                <ChatList
+                    rows={rows}
+                    offset={offset}
+                    setOffset={setOffset}
+                    isLoading={isLoading}
+                    chats={chats}
+                />
+            </Stack>
+        );
+    }
+};
+
+type SearchBarProps = {
+    setName: (name: string) => void;
+    setOffset: (offset: number) => void;
+    setChats: (chats: Chat[]) => void;
+};
+
+const SearchBar = (props: SearchBarProps) => {
+    const { setName, setOffset, setChats } = props;
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && event.target instanceof HTMLInputElement) {
             setName(event.target.value);
+            setOffset(0);
+            setChats([]);
         }
     };
 
     return (
-        <Stack justifyContent="center" alignItems="center" spacing={2}>
-            <SearchBar onKeyDown={handleSearch} />
-            <List name={name} />
-        </Stack>
+        <TextField
+            variant="standard"
+            margin="normal"
+            InputProps={{
+                startAdornment: <SearchIcon />,
+            }}
+            onKeyDown={handleKeyDown}
+        />
     );
 };
 
-const SearchBar = (props: TextFieldProps) => (
-    <TextField
-        {...props}
-        variant="standard"
-        margin="normal"
-        InputProps={{
-            startAdornment: <SearchIcon />,
-        }}
-    />
-);
+type ChatListProps = {
+    rows: number;
+    offset: number;
+    setOffset: (offset: number) => void;
+    isLoading: boolean;
+    chats: Chat[];
+};
 
-const List = (props: { name: string }) => {
-    const { rows, page, setPage } = usePagination();
-    const { isLoading, data } = useQuery<ChatList, Error>(
-        ['chats', page, props.name],
-        () => {
-            const offset = rows * (page - 1);
-            return getChats(rows, offset, props.name);
+const ChatList = (props: ChatListProps) => {
+    const { rows, offset, setOffset, isLoading, chats } = props;
+    const chatList = useRef<HTMLUListElement>(null);
+    const [scrollPosition, setScrollPosition] = useState<number | null>(null);
+
+    useEffect(() => {
+        scrollPosition && chatList.current?.scroll(0, scrollPosition);
+    }, [chats]);
+
+    const handleScroll = (event: UIEvent<HTMLUListElement>) => {
+        const ul = event.currentTarget;
+        const isBottom = ul.scrollTop + ul.offsetHeight === ul.scrollHeight;
+        if (isBottom) {
+            setScrollPosition(ul.scrollTop);
+            setOffset(offset + rows);
         }
-    );
+    };
 
-    if (isLoading) {
-        return <Loading />;
-    } else if (data) {
+    if (chats.length > 0) {
         return (
-            <>
-                <BaseList>
-                    {data.chats.map((chat, index) => (
-                        <ListItem disablePadding key={index}>
-                            <ListItemButton
-                                component="a"
-                                href={`/chats/${chat.id}`}
-                            >
-                                <ListItemText primary={chat.name} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </BaseList>
-                <Pagination
-                    total={data.count}
-                    rows={rows}
-                    page={page}
-                    onChangePage={setPage}
-                />
-            </>
+            <List
+                ref={chatList}
+                onScroll={handleScroll}
+                sx={{
+                    height: '100%',
+                    overflow: 'auto',
+                }}
+            >
+                {chats.map((chat, index) => (
+                    <ListItem disablePadding key={index}>
+                        <ListItemButton
+                            component="a"
+                            href={`/chats/${chat.id}`}
+                        >
+                            <ListItemText primary={chat.name} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
         );
+    } else if (isLoading) {
+        return <Loading />;
     } else {
-        return <ErrorAlert />;
+        return null;
     }
 };
