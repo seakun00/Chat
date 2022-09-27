@@ -1,10 +1,5 @@
 import { client } from '@/ts/http/client';
 
-export type CommentList = {
-    count: number; // TODO: 使ってなさそうなので削除する
-    comments: Comment[];
-};
-
 export type Comment = {
     id: number;
     type: string;
@@ -16,7 +11,7 @@ export const getComments = (
     chatId: number,
     limit: number,
     offset: number
-): Promise<CommentList> => {
+): Promise<Comment[]> => {
     const params = new URLSearchParams({
         limit: limit.toString(),
         offset: offset.toString(),

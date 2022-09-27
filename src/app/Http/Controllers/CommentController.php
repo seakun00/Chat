@@ -17,19 +17,13 @@ class CommentController extends Controller
 
     public function index(CommentIndexRequest $request, Chat $chat): JsonResponse
     {
-        $query = $this->commentRepository->getByChatAsBuilder($chat);
-
-        $count = $query->count();
-
         $offset = $request->get('offset');
         $limit = $request->get('limit');
-        $comments = $query->offset($offset)
+        $comments = $this->commentRepository->getByChatAsBuilder($chat)
+            ->offset($offset)
             ->limit($limit)
             ->get();
 
-        return response()->json([
-            'comments' => $comments,
-            'count' => $count,
-        ]);
+        return response()->json($comments);
     }
 }
