@@ -1,11 +1,13 @@
 import React, {
     KeyboardEvent,
+    MouseEvent,
     UIEvent,
     useEffect,
     useRef,
     useState,
 } from 'react';
 import {
+    Button,
     List,
     ListItem,
     ListItemButton,
@@ -18,6 +20,7 @@ import { Chat, getChats } from '@/ts/http/chat';
 import { ErrorAlert } from '@/ts/layout/Error';
 import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
+import { sub, subHover } from '@/ts/layout/color';
 
 export const Chats = () => {
     const rows = 20;
@@ -46,7 +49,7 @@ export const Chats = () => {
     );
 
     if (isError) {
-        return <ErrorAlert />
+        return <ErrorAlert />;
     } else {
         return (
             <Stack spacing={2} sx={{ height: '100%' }}>
@@ -133,11 +136,12 @@ const ChatList = (props: ChatListProps) => {
                 }}
             >
                 {chats.map((chat, index) => (
-                    <ListItem disablePadding key={index}>
-                        <ListItemButton
-                            component="a"
-                            href={`/chats/${chat.id}`}
-                        >
+                    <ListItem
+                        key={index}
+                        secondaryAction={<ChatBookmarkButton />}
+                        disablePadding
+                    >
+                        <ListItemButton>
                             <ListItemText primary={chat.name} />
                         </ListItemButton>
                     </ListItem>
@@ -150,3 +154,25 @@ const ChatList = (props: ChatListProps) => {
         return null;
     }
 };
+
+const ChatBookmarkButton = () => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+        console.log("クリック")
+    }
+
+    return (
+        <Button
+            variant="contained"
+            size="small"
+            sx={{
+                backgroundColor: sub,
+                '&:hover': {
+                    backgroundColor: subHover,
+                },
+            }}
+            onClick={handleClick}
+        >
+            ブックマーク
+        </Button>
+    );
+}
