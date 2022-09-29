@@ -1,13 +1,11 @@
 import React, {
     KeyboardEvent,
-    MouseEvent,
     UIEvent,
     useEffect,
     useRef,
     useState,
 } from 'react';
 import {
-    IconButton,
     List,
     ListItem,
     ListItemButton,
@@ -20,8 +18,7 @@ import { Chat, getChats } from '@/ts/http/chat';
 import { ErrorAlert } from '@/ts/layout/Error';
 import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
-import { registerChatBookmark } from '@/ts/http/chatBookmarks';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { ChatBookmarkRegistrationButton } from '@/ts/Chats/ChatBookmarkRegistrationButton';
 
 export const Chats = () => {
     const rows = 20;
@@ -140,7 +137,7 @@ const ChatList = (props: ChatListProps) => {
                     <ListItem
                         key={index}
                         secondaryAction={
-                            <ChatBookmarkButton chatId={chat.id} />
+                            <ChatBookmarkRegistrationButton chatId={chat.id} />
                         }
                         disablePadding
                     >
@@ -156,21 +153,4 @@ const ChatList = (props: ChatListProps) => {
     } else {
         return null;
     }
-};
-
-type ChatBookmarkButtonProps = {
-    chatId: number;
-};
-
-const ChatBookmarkButton = (props: ChatBookmarkButtonProps) => {
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        registerChatBookmark(props.chatId).then((res) => console.log(res));
-    };
-
-    // 登録済みの場合は表示を変える
-    return (
-        <IconButton size="small" onClick={handleClick}>
-            <BookmarkBorderIcon />
-        </IconButton>
-    );
 };
