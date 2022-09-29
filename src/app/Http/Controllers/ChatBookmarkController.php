@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChatBookmarkCreateRequest;
+use App\Models\Chat;
 use App\Models\ChatBookmark;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,5 +22,19 @@ class ChatBookmarkController extends Controller
             ->get();
 
         return response()->json($chatBookmarks);
+    }
+
+    public function create(ChatBookmarkCreateRequest $request): JsonResponse
+    {
+        $user= $request->user();
+        $chatId = $request->post('chat_id');
+        $chat = Chat::findOrFail($chatId);
+
+        $chatBookmark = new ChatBookmark();
+        $chatBookmark->user()->associate($user);
+        $chatBookmark->chat()->associate($chat);
+        $chatBookmark->save();
+
+        return response()->json($chatBookmark);
     }
 }

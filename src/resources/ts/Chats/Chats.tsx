@@ -7,7 +7,7 @@ import React, {
     useState,
 } from 'react';
 import {
-    Button,
+    IconButton,
     List,
     ListItem,
     ListItemButton,
@@ -20,7 +20,8 @@ import { Chat, getChats } from '@/ts/http/chat';
 import { ErrorAlert } from '@/ts/layout/Error';
 import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
-import { sub, subHover } from '@/ts/layout/color';
+import { registerChatBookmark } from '@/ts/http/chatBookmarks';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 export const Chats = () => {
     const rows = 20;
@@ -138,7 +139,9 @@ const ChatList = (props: ChatListProps) => {
                 {chats.map((chat, index) => (
                     <ListItem
                         key={index}
-                        secondaryAction={<ChatBookmarkButton />}
+                        secondaryAction={
+                            <ChatBookmarkButton chatId={chat.id} />
+                        }
                         disablePadding
                     >
                         <ListItemButton>
@@ -155,24 +158,19 @@ const ChatList = (props: ChatListProps) => {
     }
 };
 
-const ChatBookmarkButton = () => {
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        console.log("クリック")
-    }
+type ChatBookmarkButtonProps = {
+    chatId: number;
+};
 
+const ChatBookmarkButton = (props: ChatBookmarkButtonProps) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+        registerChatBookmark(props.chatId).then((res) => console.log(res));
+    };
+
+    // 登録済みの場合は表示を変える
     return (
-        <Button
-            variant="contained"
-            size="small"
-            sx={{
-                backgroundColor: sub,
-                '&:hover': {
-                    backgroundColor: subHover,
-                },
-            }}
-            onClick={handleClick}
-        >
-            ブックマーク
-        </Button>
+        <IconButton size="small" onClick={handleClick}>
+            <BookmarkBorderIcon />
+        </IconButton>
     );
-}
+};
