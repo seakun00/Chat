@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { useQuery } from 'react-query';
-import { ChatBookmark, getChatBookmarks } from '@/ts/http/chatBookmarks';
 import { Loading } from '@/ts/layout/Loading';
 import {
     IconButton,
@@ -14,13 +12,11 @@ import AddIcon from '@mui/icons-material/Add';
 import { ErrorAlert } from '@/ts/layout/Error';
 import { ChatIdContext } from '@/ts/Home/ChatIdProvider';
 import { main } from '@/ts/layout/color';
+import { ChatBookmarkContext } from '@/ts/Home/ChatBookmarkProvider';
 
 export const ChatBookmarks = () => {
-    const { isLoading, data } = useQuery<ChatBookmark[], Error>(
-        'chat_bookmarks',
-        getChatBookmarks
-    );
     const { chatId, setChatId } = useContext(ChatIdContext);
+    const { isLoading, data } = useContext(ChatBookmarkContext);
 
     if (isLoading) {
         return <Loading />;
