@@ -26,7 +26,7 @@ class ChatBookmarkController extends Controller
 
     public function create(ChatBookmarkCreateRequest $request): JsonResponse
     {
-        $user= $request->user();
+        $user = $request->user();
         $chatId = $request->post('chat_id');
         $chat = Chat::findOrFail($chatId);
 
