@@ -30,7 +30,7 @@ export const ChatBookmarks = () => {
                         disablePadding
                         dense
                         sx={[
-                            chatBookmark.id === chatId && {
+                            chatBookmark.chat_id === chatId && {
                                 backgroundColor: 'cornflowerblue',
                             },
                         ]}
