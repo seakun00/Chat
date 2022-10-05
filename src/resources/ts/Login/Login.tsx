@@ -6,7 +6,7 @@ import { client, getCsrfToken } from '@/ts/http/client';
 import { LoginError } from '@/ts/http/error/LoginError';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
-import {sub, subHover} from "@/ts/layout/color";
+import { sub, subHover } from '@/ts/layout/color';
 
 type FormInputs = {
     _token: string | null;
