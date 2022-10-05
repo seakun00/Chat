@@ -8,9 +8,15 @@ export const useGetComments = (
     offset: number
 ): Comment[] => {
     const [comments, setComments] = useState<Comment[]>([]);
+    const [currentChatId, setCurrentChatId] = useState<number>(chatId);
+
+    if (chatId !== currentChatId) {
+        setComments([])
+        setCurrentChatId(chatId);
+    }
 
     useQuery<Comment[], Error>(
-        ['comments', offset],
+        ['comments', chatId, offset],
         () => {
             return getComments(chatId, rows, offset);
         },
