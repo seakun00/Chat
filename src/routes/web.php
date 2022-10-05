@@ -26,7 +26,13 @@ Route::prefix('api')->group(static function () {
         ->name('comment.index');
     Route::get('/chat_bookmarks', [ChatBookmarkController::class, 'index'])
         ->middleware('auth')
-        ->name('chat_bookmarks.index');
+        ->name('chat_bookmark.index');
+    Route::post('/chat_bookmark', [ChatBookmarkController::class, 'create'])
+        ->middleware('auth')
+        ->name('chat_bookmark.create');
+    Route::delete('/chat_bookmark/{chat_bookmark}', [ChatBookmarkController::class, 'delete'])
+        ->middleware('auth')
+        ->name('chat_bookmark.delete');
 });
 Route::get('/{any}', static function () {
     return view('index');

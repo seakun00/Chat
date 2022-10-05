@@ -20,18 +20,13 @@ class ChatController extends Controller
             $query->where('name', 'like', "%$name%");
         }
 
-        $count = $query->count();
-
         $offset = $request->get('offset');
         $limit = $request->get('limit');
         $chats = $query->offset($offset)
             ->limit($limit)
             ->get();
 
-        return response()->json([
-            'chats' => $chats,
-            'count' => $count,
-        ]);
+        return response()->json($chats);
     }
 
     public function detail(Request $request, Chat $chat): JsonResponse

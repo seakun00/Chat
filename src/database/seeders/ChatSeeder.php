@@ -17,7 +17,7 @@ class ChatSeeder extends Seeder
         ]);
 
         Chat::factory()
-            ->count(30)
+            ->count(60)
             ->create();
     }
 }

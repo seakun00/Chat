@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Comment, CommentList, getComments } from '@/ts/http/comment';
+import { Comment, getComments } from '@/ts/http/comment';
 import { useQuery } from 'react-query';
 
 export const useGetComments = (
@@ -9,7 +9,7 @@ export const useGetComments = (
 ): Comment[] => {
     const [comments, setComments] = useState<Comment[]>([]);
 
-    useQuery<CommentList, Error>(
+    useQuery<Comment[], Error>(
         ['comments', offset],
         () => {
             return getComments(chatId, rows, offset);
@@ -26,7 +26,7 @@ export const useGetComments = (
                         return !isRegistered;
                     });
 
-                const fetchedComments = removeDuplicate(data.comments);
+                const fetchedComments = removeDuplicate(data);
                 if (fetchedComments.length === 0) return;
 
                 // コメント作成時のハンドリングは別で対応するつもりなので、一旦前のコメントを取得する場合だけ対応。
