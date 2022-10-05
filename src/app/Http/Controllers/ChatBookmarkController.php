@@ -37,4 +37,10 @@ class ChatBookmarkController extends Controller
 
         return response()->json($chatBookmark);
     }
+
+    public function delete(ChatBookmark $chatBookmark): JsonResponse
+    {
+        $chatBookmark->delete();
+        return response()->json();
+    }
 }
