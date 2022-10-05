@@ -1,6 +1,7 @@
 import React, {
     KeyboardEvent,
     UIEvent,
+    useContext,
     useEffect,
     useRef,
     useState,
@@ -18,7 +19,9 @@ import { Chat, getChats } from '@/ts/http/chat';
 import { ErrorAlert } from '@/ts/layout/Error';
 import { Loading } from '@/ts/layout/Loading';
 import SearchIcon from '@mui/icons-material/Search';
-import { ChatBookmarkRegistrationButton } from '@/ts/Chats/ChatBookmarkRegistrationButton';
+import { ChatBookmarkRegisterButton } from '@/ts/Chats/ChatBookmarkRegisterButton';
+import { ChatBookmarkContext } from '@/ts/Home/ChatBookmarkProvider';
+import { ChatBookmarkDeleteButton } from '@/ts/Chats/ChatBookmarkDeleteButton';
 
 export const Chats = () => {
     const rows = 20;
@@ -109,6 +112,7 @@ const ChatList = (props: ChatListProps) => {
     const { rows, offset, setOffset, isLoading, chats } = props;
     const chatList = useRef<HTMLUListElement>(null);
     const [scrollPosition, setScrollPosition] = useState<number | null>(null);
+    const { data: chatBookmarks } = useContext(ChatBookmarkContext);
 
     useEffect(() => {
         scrollPosition && chatList.current?.scroll(0, scrollPosition);
@@ -133,19 +137,32 @@ const ChatList = (props: ChatListProps) => {
                     overflow: 'auto',
                 }}
             >
-                {chats.map((chat, index) => (
-                    <ListItem
-                        key={index}
-                        secondaryAction={
-                            <ChatBookmarkRegistrationButton chatId={chat.id} />
-                        }
-                        disablePadding
-                    >
-                        <ListItemButton>
-                            <ListItemText primary={chat.name} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                {chats.map((chat, index) => {
+                    const registeredChatBookmark = chatBookmarks?.find(
+                        (chatBookmark) => chatBookmark.chat_id === chat.id
+                    );
+                    return (
+                        <ListItem
+                            key={index}
+                            secondaryAction={
+                                registeredChatBookmark ? (
+                                    <ChatBookmarkDeleteButton
+                                        id={registeredChatBookmark.id}
+                                    />
+                                ) : (
+                                    <ChatBookmarkRegisterButton
+                                        chatId={chat.id}
+                                    />
+                                )
+                            }
+                            disablePadding
+                        >
+                            <ListItemButton>
+                                <ListItemText primary={chat.name} />
+                            </ListItemButton>
+                        </ListItem>
+                    );
+                })}
             </List>
         );
     } else if (isLoading) {

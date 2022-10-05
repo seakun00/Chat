@@ -1,4 +1,4 @@
-import React, { MouseEvent, useContext } from 'react';
+import React, { useContext } from 'react';
 import { registerChatBookmark } from '@/ts/http/chatBookmarks';
 import { IconButton } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
@@ -8,11 +8,9 @@ type ChatBookmarkButtonProps = {
     chatId: number;
 };
 
-export const ChatBookmarkRegistrationButton = (
-    props: ChatBookmarkButtonProps
-) => {
+export const ChatBookmarkRegisterButton = (props: ChatBookmarkButtonProps) => {
     const { refetch } = useContext(ChatBookmarkContext);
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleClick = () => {
         registerChatBookmark(props.chatId).then(() => refetch());
     };
 

@@ -22,3 +22,14 @@ export const registerChatBookmark = (chatId: number) =>
             'Content-Type': 'application/json',
         },
     });
+
+export const deleteChatBookmark = (id: number) =>
+    client(`/api/chat_bookmark/${id}`, {
+        method: 'DELETE',
+        body: JSON.stringify({
+            _token: getCsrfToken(),
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
