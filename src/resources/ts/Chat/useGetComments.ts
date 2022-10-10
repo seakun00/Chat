@@ -11,7 +11,7 @@ export const useGetComments = (
     const [currentChatId, setCurrentChatId] = useState<number>(chatId);
 
     if (chatId !== currentChatId) {
-        setComments([])
+        setComments([]);
         setCurrentChatId(chatId);
     }
 
