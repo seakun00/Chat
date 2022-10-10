@@ -18,9 +18,6 @@ Route::prefix('api')->group(static function () {
     Route::get('/chats', [ChatController::class, 'index'])
         ->middleware('auth')
         ->name('chat.index');
-    Route::get('/chats/{chat}', [ChatController::class, 'detail'])
-        ->middleware('auth')
-        ->name('chat.detail');
     Route::get('/chats/{chat}/comments', [CommentController::class, 'index'])
         ->middleware('auth')
         ->name('comment.index');

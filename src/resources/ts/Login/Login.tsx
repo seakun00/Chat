@@ -6,6 +6,7 @@ import { client, getCsrfToken } from '@/ts/http/client';
 import { LoginError } from '@/ts/http/error/LoginError';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
+import { sub, subHover } from '@/ts/layout/color';
 
 type FormInputs = {
     _token: string | null;
@@ -94,6 +95,12 @@ export const Login = () => {
                     type="submit"
                     variant="contained"
                     loading={isSubmitting}
+                    sx={{
+                        backgroundColor: sub,
+                        '&:hover': {
+                            backgroundColor: subHover,
+                        },
+                    }}
                 >
                     ログイン
                 </LoadingButton>

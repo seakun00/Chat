@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChatIndexRequest;
 use App\Models\Chat;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
@@ -27,10 +26,5 @@ class ChatController extends Controller
             ->get();
 
         return response()->json($chats);
-    }
-
-    public function detail(Request $request, Chat $chat): JsonResponse
-    {
-        return response()->json($chat);
     }
 }

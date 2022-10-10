@@ -3,7 +3,7 @@ import React from 'react';
 
 // TODO: ページのデザインが固まったらSkeletonで読み込みイメージを実装する
 export const Loading = () => (
-    <Box component="div" sx={{ textAlign: 'center' }}>
-        <CircularProgress />
+    <Box component="div" sx={{ textAlign: 'center', mt: 1 }}>
+        <CircularProgress color="inherit" />
     </Box>
 );
