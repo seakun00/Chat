@@ -42,6 +42,7 @@ export const ChatList = (props: ChatListProps) => {
                     height: '100%',
                     overflow: 'auto',
                 }}
+                disablePadding
             >
                 {chats.map((chat, index) => {
                     const registeredChatBookmark = chatBookmarks?.find(

@@ -22,11 +22,10 @@ export const SearchBar = (props: SearchBarProps) => {
 
     return (
         <TextField
-            variant="standard"
             margin="normal"
-            InputProps={{
-                startAdornment: <SearchIcon />,
-            }}
+            size="small"
+            InputProps={{ startAdornment: <SearchIcon /> }}
+            sx={{ mx: 2 }}
             onKeyDown={handleKeyDown}
         />
     );

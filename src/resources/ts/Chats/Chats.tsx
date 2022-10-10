@@ -36,7 +36,7 @@ export const Chats = () => {
         return <ErrorAlert />;
     } else {
         return (
-            <Stack spacing={2} sx={{ height: '100%' }}>
+            <Stack sx={{ height: '100%' }}>
                 <SearchBar
                     setName={setName}
                     setOffset={setOffset}
