@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ErrorAlert } from '@/ts/layout/Error';
-import { ChatIdContext } from '@/ts/Home/ChatIdProvider';
+import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { main } from '@/ts/layout/color';
-import { ChatBookmarkContext } from '@/ts/Home/ChatBookmarkProvider';
+import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 
 export const ChatBookmarks = () => {
     const { chatId, setChatId } = useContext(ChatIdContext);

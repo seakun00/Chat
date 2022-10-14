@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { registerChatBookmark } from '@/ts/http/chatBookmarks';
 import { IconButton } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import { ChatBookmarkContext } from '@/ts/Home/ChatBookmarkProvider';
+import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 import { sub } from '@/ts/layout/color';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 

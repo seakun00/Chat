@@ -1,6 +1,6 @@
 import { Chat } from '@/ts/http/chat';
 import React, { UIEvent, useContext, useEffect, useRef, useState } from 'react';
-import { ChatBookmarkContext } from '@/ts/Home/ChatBookmarkProvider';
+import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { ChatBookmarkDeleteButton } from '@/ts/Chats/ChatBookmarkDeleteButton';
 import { ChatBookmarkRegisterButton } from '@/ts/Chats/ChatBookmarkRegisterButton';

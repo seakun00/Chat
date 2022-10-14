@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Stack } from '@mui/material';
 import { Comments } from '@/ts/Chat/Comments';
-import { ChatIdContext } from '@/ts/Home/ChatIdProvider';
+import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { ChatsLink } from '@/ts/Chat/ChatsLink';
 
 export const Chat = () => {
