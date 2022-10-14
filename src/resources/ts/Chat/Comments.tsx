@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemText } from '@mui/material';
 import React, { UIEvent, useContext, useEffect, useRef, useState } from 'react';
 import { useGetComments } from '@/ts/Chat/useGetComments';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
@@ -37,20 +37,35 @@ export const Comments = () => {
         }
     };
 
-    return (
-        <List
-            ref={commentList}
-            onScroll={handleScroll}
-            sx={{
-                height: '100%',
-                overflow: 'auto',
-            }}
-        >
-            {comments.map((comment) => (
-                <ListItem key={comment.id}>
-                    <ListItemText primary={comment.text} />
-                </ListItem>
-            ))}
-        </List>
-    );
+    if (comments.length === 0) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                }}
+            >
+                コメントを追加しよう！
+            </Box>
+        );
+    } else {
+        return (
+            <List
+                ref={commentList}
+                onScroll={handleScroll}
+                sx={{
+                    height: '100%',
+                    overflow: 'auto',
+                }}
+            >
+                {comments.map((comment) => (
+                    <ListItem key={comment.id}>
+                        <ListItemText primary={comment.text} />
+                    </ListItem>
+                ))}
+            </List>
+        );
+    }
 };
