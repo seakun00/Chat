@@ -20,3 +20,9 @@ export const getChats = (
         method: 'GET',
     });
 };
+
+export const getChat = (
+    chatId: number
+): Promise<Chat> => client(`/api/chats/${chatId}`, {
+        method: 'GET',
+    });
