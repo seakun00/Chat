@@ -1,24 +1,20 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode } from 'react';
 
 type ChatIdProviderProps = {
+    chatId: number;
     children: ReactNode;
 };
 
 type ChatIdContextType = {
-    chatId: number | undefined;
-    setChatId: (chatId: number) => void;
+    chatId: number;
 };
 
 export const ChatIdContext = createContext<ChatIdContextType>(
     {} as ChatIdContextType
 );
 
-export const ChatIdProvider = ({ children }: ChatIdProviderProps) => {
-    const [chatId, setChatId] = useState<number>();
-
-    return (
-        <ChatIdContext.Provider value={{ chatId, setChatId }}>
-            {children}
-        </ChatIdContext.Provider>
-    );
-};
+export const ChatIdProvider = ({ chatId, children }: ChatIdProviderProps) => (
+    <ChatIdContext.Provider value={{ chatId }}>
+        {children}
+    </ChatIdContext.Provider>
+);

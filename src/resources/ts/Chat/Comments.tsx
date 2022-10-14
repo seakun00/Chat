@@ -1,4 +1,4 @@
-import { List, ListItem, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemText } from '@mui/material';
 import React, { UIEvent, useContext, useEffect, useRef, useState } from 'react';
 import { useGetComments } from '@/ts/Chat/useGetComments';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
@@ -6,7 +6,7 @@ import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 export const Comments = () => {
     const { chatId } = useContext(ChatIdContext);
     const [offset, setOffset] = useState(0);
-    const comments = useGetComments(Number(chatId), 30, offset);
+    const { isLoading, comments } = useGetComments(chatId, 30, offset);
 
     const commentList = useRef<HTMLUListElement>(null);
     const [scrollPosition, setScrollPosition] = useState<HTMLLIElement | null>(
@@ -37,20 +37,35 @@ export const Comments = () => {
         }
     };
 
-    return (
-        <List
-            ref={commentList}
-            onScroll={handleScroll}
-            sx={{
-                height: '100%',
-                overflow: 'auto',
-            }}
-        >
-            {comments.map((comment) => (
-                <ListItem key={comment.id}>
-                    <ListItemText primary={comment.text} />
-                </ListItem>
-            ))}
-        </List>
-    );
+    if (!isLoading && comments.length === 0) {
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                }}
+            >
+                コメントを追加しよう！
+            </Box>
+        );
+    } else {
+        return (
+            <List
+                ref={commentList}
+                onScroll={handleScroll}
+                sx={{
+                    height: '100%',
+                    overflow: 'auto',
+                }}
+            >
+                {comments.map((comment) => (
+                    <ListItem key={comment.id}>
+                        <ListItemText primary={comment.text} />
+                    </ListItem>
+                ))}
+            </List>
+        );
+    }
 };

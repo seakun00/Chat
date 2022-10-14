@@ -1,10 +1,8 @@
 import { Chat } from '@/ts/http/chat';
-import React, { UIEvent, useContext, useEffect, useRef, useState } from 'react';
-import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
+import React, { UIEvent, useEffect, useRef, useState } from 'react';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { ChatBookmarkDeleteButton } from '@/ts/Chats/ChatBookmarkDeleteButton';
-import { ChatBookmarkRegisterButton } from '@/ts/Chats/ChatBookmarkRegisterButton';
 import { Loading } from '@/ts/layout/Loading';
+import { ChatBookmarkToggleButton } from '@/ts/common/ChatBookmarkToggleButton';
 
 type ChatListProps = {
     rows: number;
@@ -18,7 +16,6 @@ export const ChatList = (props: ChatListProps) => {
     const { rows, offset, setOffset, isLoading, chats } = props;
     const chatList = useRef<HTMLUListElement>(null);
     const [scrollPosition, setScrollPosition] = useState<number | null>(null);
-    const { data: chatBookmarks } = useContext(ChatBookmarkContext);
 
     useEffect(() => {
         scrollPosition && chatList.current?.scroll(0, scrollPosition);
@@ -45,26 +42,15 @@ export const ChatList = (props: ChatListProps) => {
                 disablePadding
             >
                 {chats.map((chat, index) => {
-                    const registeredChatBookmark = chatBookmarks?.find(
-                        (chatBookmark) => chatBookmark.chat_id === chat.id
-                    );
                     return (
                         <ListItem
                             key={index}
                             secondaryAction={
-                                registeredChatBookmark ? (
-                                    <ChatBookmarkDeleteButton
-                                        id={registeredChatBookmark.id}
-                                    />
-                                ) : (
-                                    <ChatBookmarkRegisterButton
-                                        chatId={chat.id}
-                                    />
-                                )
+                                <ChatBookmarkToggleButton chatId={chat.id} />
                             }
                             disablePadding
                         >
-                            <ListItemButton>
+                            <ListItemButton href={`/${chat.id}`}>
                                 <ListItemText primary={chat.name} />
                             </ListItemButton>
                         </ListItem>

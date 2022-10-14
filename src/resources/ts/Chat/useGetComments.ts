@@ -2,11 +2,16 @@ import { useState } from 'react';
 import { Comment, getComments } from '@/ts/http/comment';
 import { useQuery } from 'react-query';
 
+type UseGetCommentsResult = {
+    isLoading: boolean;
+    comments: Comment[];
+};
+
 export const useGetComments = (
     chatId: number,
     rows: number,
     offset: number
-): Comment[] => {
+): UseGetCommentsResult => {
     const [comments, setComments] = useState<Comment[]>([]);
     const [currentChatId, setCurrentChatId] = useState<number>(chatId);
 
@@ -15,7 +20,7 @@ export const useGetComments = (
         setCurrentChatId(chatId);
     }
 
-    useQuery<Comment[], Error>(
+    const { isLoading } = useQuery<Comment[], Error>(
         ['comments', chatId, offset],
         () => {
             return getComments(chatId, rows, offset);
@@ -42,5 +47,5 @@ export const useGetComments = (
         }
     );
 
-    return comments;
+    return { isLoading, comments };
 };

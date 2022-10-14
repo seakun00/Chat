@@ -27,4 +27,9 @@ class ChatController extends Controller
 
         return response()->json($chats);
     }
+
+    public function detail(Chat $chat): JsonResponse
+    {
+        return response()->json($chat);
+    }
 }

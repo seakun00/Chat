@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stack } from '@mui/material';
 import { useQuery } from 'react-query';
 import { Chat, getChats } from '@/ts/http/chat';
-import { ErrorAlert } from '@/ts/layout/Error';
+import { ErrorAlert } from '@/ts/layout/ErrorAlert';
 import { SearchBar } from '@/ts/Chats/SearchBar';
 import { ChatList } from '@/ts/Chats/ChatList';
 
