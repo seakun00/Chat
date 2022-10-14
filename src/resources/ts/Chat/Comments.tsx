@@ -6,7 +6,7 @@ import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 export const Comments = () => {
     const { chatId } = useContext(ChatIdContext);
     const [offset, setOffset] = useState(0);
-    const comments = useGetComments(Number(chatId), 30, offset);
+    const comments = useGetComments(chatId, 30, offset);
 
     const commentList = useRef<HTMLUListElement>(null);
     const [scrollPosition, setScrollPosition] = useState<HTMLLIElement | null>(

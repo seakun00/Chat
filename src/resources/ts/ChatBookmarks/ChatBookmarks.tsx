@@ -9,13 +9,13 @@ import {
     ListSubheader,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { ErrorAlert } from '@/ts/layout/Error';
+import { ErrorAlert } from '@/ts/layout/ErrorAlert';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { main } from '@/ts/layout/color';
 import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 
 export const ChatBookmarks = () => {
-    const { chatId, setChatId } = useContext(ChatIdContext);
+    const { chatId } = useContext(ChatIdContext);
     const { isLoading, data } = useContext(ChatBookmarkContext);
 
     if (isLoading) {
@@ -35,9 +35,7 @@ export const ChatBookmarks = () => {
                             },
                         ]}
                     >
-                        <ListItemButton
-                            onClick={() => setChatId(chatBookmark.chat_id)}
-                        >
+                        <ListItemButton href={`/${chatBookmark.chat_id}`}>
                             <ListItemText
                                 primary={chatBookmark.name}
                                 primaryTypographyProps={{

@@ -7,6 +7,7 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { Chat } from '@/ts/Chat/Chat';
 import { Layout } from '@/ts/layout/Layout';
 import { ChatBookmarksLayout } from '@/ts/layout/ChatBookmarksLayout';
+import { ChatsLink } from '@/ts/Chat/ChatsLink';
 
 export const App = () => {
     const queryClient = new QueryClient();
@@ -22,8 +23,9 @@ export const App = () => {
                             <Route index element={<Login />} />
                         </Route>
                         <Route path="/" element={<ChatBookmarksLayout />}>
-                            <Route index element={<Chat />} />
-                            <Route path="chats" element={<Chats />} />
+                            <Route index element={<ChatsLink />} />
+                            <Route path="/:chatId" element={<Chat />} />
+                            <Route path="/chats" element={<Chats />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
