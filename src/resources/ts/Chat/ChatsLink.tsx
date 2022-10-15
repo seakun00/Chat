@@ -4,12 +4,10 @@ import React from 'react';
 
 export const ChatsLink = () => (
     <Box
-        sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%',
-        }}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
     >
         <Button
             variant="contained"

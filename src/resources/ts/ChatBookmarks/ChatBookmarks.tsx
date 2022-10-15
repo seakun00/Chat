@@ -8,7 +8,7 @@ import {
     ListItemText,
     ListSubheader,
 } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 import { ErrorAlert } from '@/ts/layout/ErrorAlert';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { main } from '@/ts/layout/color';
@@ -69,7 +69,7 @@ const ListHeader = () => (
             component="div"
             secondaryAction={
                 <IconButton edge="end" href="/chats">
-                    <AddIcon
+                    <SearchIcon
                         sx={{
                             color: 'lightgray',
                         }}
