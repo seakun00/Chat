@@ -5,7 +5,6 @@ import { Outlet, useParams } from 'react-router-dom';
 import { useAppBarHeight } from '@/ts/layout/useAppBarHeight';
 import { ChatIdProvider } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { ChatBookmarkProvider } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
-import { main } from '@/ts/layout/color';
 import { ChatBookmarks } from '@/ts/ChatBookmarks/ChatBookmarks';
 import { ErrorAlert } from '@/ts/layout/ErrorAlert';
 
@@ -33,14 +32,7 @@ export const ChatBookmarksLayout = () => {
                                 height: `calc(100vh - ${appBarMinHeight}px)`,
                             }}
                         >
-                            <Grid
-                                item
-                                xs={2}
-                                sx={{
-                                    backgroundColor: main,
-                                    color: 'white',
-                                }}
-                            >
+                            <Grid item xs={2}>
                                 <ChatBookmarks />
                             </Grid>
                             <Grid item xs={10}>

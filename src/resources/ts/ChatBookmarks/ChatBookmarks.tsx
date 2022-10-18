@@ -11,7 +11,7 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import { ErrorAlert } from '@/ts/layout/ErrorAlert';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
-import { main } from '@/ts/layout/color';
+import { main, mainHover } from '@/ts/layout/color';
 import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 
 export const ChatBookmarks = () => {
@@ -22,7 +22,13 @@ export const ChatBookmarks = () => {
         return <Loading />;
     } else if (data) {
         return (
-            <List>
+            <List
+                sx={{
+                    height: "100%",
+                    backgroundColor: main,
+                    color: 'white',
+                }}
+            >
                 <ListHeader />
                 {data.map((chatBookmark) => (
                     <ListItem
@@ -32,6 +38,11 @@ export const ChatBookmarks = () => {
                         sx={[
                             chatBookmark.chat_id === chatId && {
                                 backgroundColor: 'cornflowerblue',
+                            },
+                            {
+                                '&:hover': {
+                                    backgroundColor: mainHover,
+                                },
                             },
                         ]}
                     >
