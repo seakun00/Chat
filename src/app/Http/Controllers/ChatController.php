@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChatCreateRequest;
 use App\Http\Requests\ChatIndexRequest;
 use App\Models\Chat;
 use Illuminate\Http\JsonResponse;
@@ -31,5 +32,16 @@ class ChatController extends Controller
     public function detail(Chat $chat): JsonResponse
     {
         return response()->json($chat);
+    }
+
+    public function create(ChatCreateRequest $request): JsonResponse
+    {
+        $name = $request->post('name');
+
+        $chat = new Chat();
+        $chat->name = $name;
+        $chat->save();
+
+        return response()->json();
     }
 }

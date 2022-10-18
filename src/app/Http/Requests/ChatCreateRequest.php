@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
-class CommentIndexRequest extends ApiRequest
+class ChatCreateRequest extends ApiRequest
 {
     public function rules(): array
     {
         return [
-            'limit' => ['required', 'numeric'],
-            'offset' => ['required', 'numeric'],
+            'name' => ['required', 'unique:chats,name', 'max:30']
         ];
     }
 }
