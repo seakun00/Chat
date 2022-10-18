@@ -1,12 +1,7 @@
-import {
-    IconButton,
-    ListItem,
-    ListItemText,
-    ListSubheader,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+import { ListItem, ListItemText, ListSubheader } from '@mui/material';
 import React from 'react';
-import { main, mainHover } from '@/ts/common/color';
+import { main } from '@/ts/common/color';
+import { ChatBookmarkListHeaderMenu } from '@/ts/ChatBookmarks/ChatBookmarkListHeaderMenu';
 
 export const ChatBookmarkListHeader = () => (
     <ListSubheader
@@ -20,20 +15,7 @@ export const ChatBookmarkListHeader = () => (
     >
         <ListItem
             component="div"
-            secondaryAction={
-                <IconButton
-                    edge="end"
-                    href="/chats"
-                    sx={{
-                        color: 'lightgray',
-                        '&:hover': {
-                            backgroundColor: mainHover,
-                        },
-                    }}
-                >
-                    <SearchIcon />
-                </IconButton>
-            }
+            secondaryAction={<ChatBookmarkListHeaderMenu />}
             disableGutters
         >
             <ListItemText primary="ブックマーク" />
