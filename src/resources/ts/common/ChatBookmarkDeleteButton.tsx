@@ -21,7 +21,7 @@ export const ChatBookmarkDeleteButton = (
     };
 
     return (
-        <IconButton size="small" onClick={handleClick}>
+        <IconButton size="small" onClick={handleClick} disabled={isRequest}>
             {isRequest ? (
                 <BookmarkBorderIcon />
             ) : (

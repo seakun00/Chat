@@ -19,7 +19,7 @@ export const ChatBookmarkRegisterButton = (props: ChatBookmarkButtonProps) => {
     };
 
     return (
-        <IconButton size="small" onClick={handleClick}>
+        <IconButton size="small" onClick={handleClick} disabled={isRequest}>
             {isRequest ? (
                 <BookmarkIcon sx={{ color: sub }} />
             ) : (
