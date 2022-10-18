@@ -28,7 +28,7 @@ export const Login = () => {
     const navigate = useNavigate();
     const [loginError, setLoginError] = useState<string | null>();
 
-    const onSubmit = (formInputs: FormInputs) => {
+    const onSubmit = (formInputs: FormInputs) =>
         login(formInputs.email, formInputs.password)
             .then(() => {
                 navigate('/');
@@ -47,7 +47,6 @@ export const Login = () => {
                     setLoginError('メールアドレスかパスワードが間違っています');
                 }
             });
-    };
 
     return (
         <Container component="div" maxWidth="xs" sx={{ mt: 10 }}>
@@ -87,6 +86,7 @@ export const Login = () => {
                     type="submit"
                     variant="contained"
                     loading={isSubmitting}
+                    disabled={isSubmitting}
                     sx={{
                         backgroundColor: sub,
                         '&:hover': {
