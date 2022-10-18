@@ -57,9 +57,6 @@ export const ChatBookmarkListHeaderMenu = () => {
                         },
                     },
                 }}
-                sx={{
-                    backgroundColor: 'white',
-                }}
             >
                 <IconButton
                     edge="end"
