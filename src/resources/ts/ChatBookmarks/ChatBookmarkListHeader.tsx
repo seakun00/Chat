@@ -4,14 +4,14 @@ import {
     ListItemText,
     ListSubheader,
 } from '@mui/material';
-import { main } from '@/ts/common/color';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import { main, mainHover } from '@/ts/common/color';
 
 export const ChatBookmarkListHeader = () => (
     <ListSubheader
+        color="primary"
         sx={{
-            height: '40px',
             color: 'lightgray',
             backgroundColor: main,
             fontSize: '15px',
@@ -21,12 +21,17 @@ export const ChatBookmarkListHeader = () => (
         <ListItem
             component="div"
             secondaryAction={
-                <IconButton edge="end" href="/chats">
-                    <SearchIcon
-                        sx={{
-                            color: 'lightgray',
-                        }}
-                    />
+                <IconButton
+                    edge="end"
+                    href="/chats"
+                    sx={{
+                        color: 'lightgray',
+                        '&:hover': {
+                            backgroundColor: mainHover,
+                        },
+                    }}
+                >
+                    <SearchIcon />
                 </IconButton>
             }
             disableGutters
