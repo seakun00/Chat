@@ -1,95 +1,18 @@
-import React, { useContext } from 'react';
-import { Loading } from '@/ts/layout/Loading';
-import {
-    IconButton,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    ListSubheader,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import { ErrorAlert } from '@/ts/layout/ErrorAlert';
-import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
-import { main, mainHover } from '@/ts/layout/color';
-import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
+import React from 'react';
+import { List } from '@mui/material';
+import { main } from '@/ts/layout/color';
+import { ChatBookmarkListHeader } from '@/ts/ChatBookmarks/ChatBookmarkListHeader';
+import { ChatBookmarkList } from '@/ts/ChatBookmarks/ChatBookmarkList';
 
-export const ChatBookmarks = () => {
-    const { chatId } = useContext(ChatIdContext);
-    const { isLoading, data } = useContext(ChatBookmarkContext);
-
-    if (isLoading) {
-        return <Loading />;
-    } else if (data) {
-        return (
-            <List
-                sx={{
-                    height: "100%",
-                    backgroundColor: main,
-                    color: 'white',
-                }}
-            >
-                <ListHeader />
-                {data.map((chatBookmark) => (
-                    <ListItem
-                        key={chatBookmark.id}
-                        disablePadding
-                        dense
-                        sx={[
-                            chatBookmark.chat_id === chatId && {
-                                backgroundColor: 'cornflowerblue',
-                            },
-                            {
-                                '&:hover': {
-                                    backgroundColor: mainHover,
-                                },
-                            },
-                        ]}
-                    >
-                        <ListItemButton href={`/chats/${chatBookmark.chat_id}`}>
-                            <ListItemText
-                                primary={chatBookmark.name}
-                                primaryTypographyProps={{
-                                    sx: {
-                                        fontSize: '15px',
-                                        fontWeight: 'bold',
-                                    },
-                                }}
-                            />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
-        );
-    } else {
-        return <ErrorAlert />;
-    }
-};
-
-const ListHeader = () => (
-    <ListSubheader
+export const ChatBookmarks = () => (
+    <List
         sx={{
-            height: '40px',
-            color: 'lightgray',
+            height: '100%',
             backgroundColor: main,
-            fontSize: '15px',
-            fontWeight: 'bold',
+            color: 'white',
         }}
     >
-        <ListItem
-            component="div"
-            secondaryAction={
-                <IconButton edge="end" href="/chats">
-                    <SearchIcon
-                        sx={{
-                            color: 'lightgray',
-                        }}
-                    />
-                </IconButton>
-            }
-            disableGutters
-        >
-            <ListItemText primary="ブックマーク" />
-        </ListItem>
-    </ListSubheader>
+        <ChatBookmarkListHeader />
+        <ChatBookmarkList />
+    </List>
 );
