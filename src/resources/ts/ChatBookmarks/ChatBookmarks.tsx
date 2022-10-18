@@ -35,7 +35,7 @@ export const ChatBookmarks = () => {
                             },
                         ]}
                     >
-                        <ListItemButton href={`/${chatBookmark.chat_id}`}>
+                        <ListItemButton href={`/chats/${chatBookmark.chat_id}`}>
                             <ListItemText
                                 primary={chatBookmark.name}
                                 primaryTypographyProps={{

@@ -26,7 +26,7 @@ export const getChat = (chatId: number): Promise<Chat> =>
         method: 'GET',
     });
 
-export const createChat = (name: string) =>
+export const createChat = (name: string): Promise<Chat> =>
     client('/api/chats', {
         method: 'POST',
         body: JSON.stringify({

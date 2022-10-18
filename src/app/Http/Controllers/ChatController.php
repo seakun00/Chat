@@ -42,6 +42,6 @@ class ChatController extends Controller
         $chat->name = $name;
         $chat->save();
 
-        return response()->json();
+        return response()->json($chat);
     }
 }

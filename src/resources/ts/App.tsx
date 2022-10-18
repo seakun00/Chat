@@ -24,7 +24,7 @@ export const App = () => {
                         </Route>
                         <Route path="/" element={<ChatBookmarksLayout />}>
                             <Route index element={<ChatsLink />} />
-                            <Route path="/:chatId" element={<Chat />} />
+                            <Route path="/chats/:chatId" element={<Chat />} />
                             <Route path="/chats" element={<Chats />} />
                         </Route>
                     </Routes>

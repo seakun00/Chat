@@ -50,7 +50,7 @@ export const ChatList = (props: ChatListProps) => {
                             }
                             disablePadding
                         >
-                            <ListItemButton href={`/${chat.id}`}>
+                            <ListItemButton href={`/chats/${chat.id}`}>
                                 <ListItemText primary={chat.name} />
                             </ListItemButton>
                         </ListItem>

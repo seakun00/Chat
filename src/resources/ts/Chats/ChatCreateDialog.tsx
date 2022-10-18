@@ -11,6 +11,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { createChat } from '@/ts/http/chat';
 import { ValidationError } from '@/ts/http/error/ValidationError';
 import { Dialog } from '@/ts/common/Dialog';
+import { useNavigate } from 'react-router-dom';
 
 type ChatCreateDialogProps = {
     isOpen: boolean;
@@ -32,13 +33,13 @@ export const ChatCreateDialog = (props: ChatCreateDialogProps) => {
             name: '',
         },
     });
+    const navigate = useNavigate();
 
     // TODO: リクエスト時に他のAPIもリクエストされてるので修正する
     const onSubmit = (formInputs: FormInputs) =>
         createChat(formInputs.name)
-            .then(() => {
-                // TODO: 成功したアラートを出す, 作成したチャットのコメント一覧に遷移する
-                props.closeDialog();
+            .then((chat) => {
+                return navigate(`/chats/${chat.id}`);
             })
             .catch((error) => {
                 if (error instanceof ValidationError) {
