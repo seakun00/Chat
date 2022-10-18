@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { main } from '@/ts/layout/color';
+import { main } from '@/ts/common/color';
 
 export const Header = () => {
     const location = useLocation();

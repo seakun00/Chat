@@ -5,7 +5,7 @@ import { ValidationError } from '@/ts/http/error/ValidationError';
 import { LoginError } from '@/ts/http/error/LoginError';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
-import { sub, subHover } from '@/ts/layout/color';
+import { sub, subHover } from '@/ts/common/color';
 import { login } from '@/ts/http/authentication';
 
 type FormInputs = {

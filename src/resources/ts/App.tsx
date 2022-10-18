@@ -5,8 +5,8 @@ import { Chats } from '@/ts/Chats/Chats';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { Chat } from '@/ts/Chat/Chat';
-import { Layout } from '@/ts/layout/Layout';
-import { ChatBookmarksLayout } from '@/ts/layout/ChatBookmarksLayout';
+import { Layout } from '@/ts/Layout/Layout';
+import { ChatBookmarksLayout } from '@/ts/Layout/ChatBookmarksLayout';
 import { ChatsLink } from '@/ts/Chat/ChatsLink';
 
 export const App = () => {

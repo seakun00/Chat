@@ -6,7 +6,7 @@ import {
     TextField,
 } from '@mui/material';
 import React from 'react';
-import { sub, subHover } from '@/ts/layout/color';
+import { sub, subHover } from '@/ts/common/color';
 import { Controller, useForm } from 'react-hook-form';
 import { createChat } from '@/ts/http/chat';
 import { ValidationError } from '@/ts/http/error/ValidationError';

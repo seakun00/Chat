@@ -3,7 +3,7 @@ import { deleteChatBookmark } from '@/ts/http/chatBookmarks';
 import { IconButton } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
-import { sub } from '@/ts/layout/color';
+import { sub } from '@/ts/common/color';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 type ChatBookmarkDeleteButtonProps = {

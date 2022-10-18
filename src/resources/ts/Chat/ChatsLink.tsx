@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { sub, subHover } from '@/ts/layout/color';
+import { sub, subHover } from '@/ts/common/color';
 import React from 'react';
 
 export const ChatsLink = () => (

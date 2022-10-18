@@ -1,10 +1,10 @@
-import { mainHover } from '@/ts/layout/color';
+import { mainHover } from '@/ts/common/color';
 import { ListItem, ListItemButton, ListItemText } from '@mui/material';
 import React, { useContext } from 'react';
 import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
-import { Loading } from '@/ts/layout/Loading';
+import { Loading } from '@/ts/common/Loading';
 import { ChatIdContext } from '@/ts/ChatBookmarks/ChatIdProvider';
-import { ErrorAlert } from '@/ts/layout/ErrorAlert';
+import { ErrorAlert } from '@/ts/common/ErrorAlert';
 
 export const ChatBookmarkList = () => {
     const { chatId } = useContext(ChatIdContext);

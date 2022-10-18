@@ -4,7 +4,7 @@ import {
     ListItemText,
     ListSubheader,
 } from '@mui/material';
-import { main } from '@/ts/layout/color';
+import { main } from '@/ts/common/color';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 

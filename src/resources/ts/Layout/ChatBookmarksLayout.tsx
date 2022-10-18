@@ -1,12 +1,12 @@
 import { Grid } from '@mui/material';
-import { Header, Spacer } from '@/ts/layout/Header';
+import { Header, Spacer } from '@/ts/Layout/Header';
 import React from 'react';
 import { Outlet, useParams } from 'react-router-dom';
-import { useAppBarHeight } from '@/ts/layout/useAppBarHeight';
+import { useAppBarHeight } from '@/ts/Layout/useAppBarHeight';
 import { ChatIdProvider } from '@/ts/ChatBookmarks/ChatIdProvider';
 import { ChatBookmarkProvider } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
 import { ChatBookmarks } from '@/ts/ChatBookmarks/ChatBookmarks';
-import { ErrorAlert } from '@/ts/layout/ErrorAlert';
+import { ErrorAlert } from '@/ts/common/ErrorAlert';
 
 type ChatBookmarksLayoutParams = {
     chatId?: string;

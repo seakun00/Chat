@@ -1,7 +1,7 @@
 import { Chat } from '@/ts/http/chat';
 import React, { UIEvent, useEffect, useRef, useState } from 'react';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { Loading } from '@/ts/layout/Loading';
+import { Loading } from '@/ts/common/Loading';
 import { ChatBookmarkToggleButton } from '@/ts/common/ChatBookmarkToggleButton';
 
 type ChatListProps = {
