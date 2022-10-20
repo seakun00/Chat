@@ -35,7 +35,6 @@ export const ChatCreateDialog = (props: ChatCreateDialogProps) => {
     });
     const navigate = useNavigate();
 
-    // TODO: リクエスト時に他のAPIもリクエストされてるので修正する
     const onSubmit = (formInputs: FormInputs) =>
         createChat(formInputs.name)
             .then((chat) => {
