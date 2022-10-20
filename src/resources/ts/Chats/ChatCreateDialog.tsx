@@ -1,11 +1,12 @@
 import {
+    Alert,
     Button,
     DialogActions,
     DialogContent,
     DialogTitle,
     TextField,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { sub, subHover } from '@/ts/common/color';
 import { Controller, useForm } from 'react-hook-form';
 import { createChat } from '@/ts/http/chat';
@@ -34,9 +35,11 @@ export const ChatCreateDialog = (props: ChatCreateDialogProps) => {
         },
     });
     const navigate = useNavigate();
+    const [isInternalServerError, setIsInternalServerError] = useState(false);
 
-    const onSubmit = (formInputs: FormInputs) =>
-        createChat(formInputs.name)
+    const onSubmit = (formInputs: FormInputs) => {
+        setIsInternalServerError(false);
+        return createChat(formInputs.name)
             .then((chat) => {
                 return navigate(`/chats/${chat.id}`);
             })
@@ -50,9 +53,11 @@ export const ChatCreateDialog = (props: ChatCreateDialogProps) => {
                             });
                         }
                     }
+                } else {
+                    setIsInternalServerError(true);
                 }
-                // TODO: バリデーションエラー以外のエラー対応を考える
             });
+    };
 
     return (
         <Dialog
@@ -63,6 +68,9 @@ export const ChatCreateDialog = (props: ChatCreateDialogProps) => {
             fullWidth
         >
             <DialogTitle>チャットを作成する</DialogTitle>
+            {isInternalServerError && (
+                <Alert severity="error">サーバーで問題が発生しました</Alert>
+            )}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <DialogContent>
                     <Controller
