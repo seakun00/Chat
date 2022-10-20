@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { main } from '@/ts/layout/color';
+import { main, mainHover } from '@/ts/common/color';
 
 export const Header = () => {
     const location = useLocation();
@@ -30,7 +30,15 @@ export const Header = () => {
                         オープンチャット
                     </Typography>
                     {location.pathname !== '/login' && (
-                        <Button color="inherit" href="/logout">
+                        <Button
+                            color="inherit"
+                            href="/logout"
+                            sx={{
+                                '&:hover': {
+                                    backgroundColor: mainHover,
+                                },
+                            }}
+                        >
                             ログアウト
                         </Button>
                     )}

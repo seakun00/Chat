@@ -1,8 +1,9 @@
 import { Chat } from '@/ts/http/chat';
 import React, { UIEvent, useEffect, useRef, useState } from 'react';
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
-import { Loading } from '@/ts/layout/Loading';
+import { Loading } from '@/ts/common/Loading';
 import { ChatBookmarkToggleButton } from '@/ts/common/ChatBookmarkToggleButton';
+import { Link } from 'react-router-dom';
 
 type ChatListProps = {
     rows: number;
@@ -50,7 +51,10 @@ export const ChatList = (props: ChatListProps) => {
                             }
                             disablePadding
                         >
-                            <ListItemButton href={`/${chat.id}`}>
+                            <ListItemButton
+                                component={Link}
+                                to={`/chats/${chat.id}`}
+                            >
                                 <ListItemText primary={chat.name} />
                             </ListItemButton>
                         </ListItem>

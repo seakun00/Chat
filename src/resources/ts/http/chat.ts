@@ -1,4 +1,4 @@
-import { client } from '@/ts/http/client';
+import { client, getCsrfToken } from '@/ts/http/client';
 
 export type Chat = {
     id: number;
@@ -24,4 +24,16 @@ export const getChats = (
 export const getChat = (chatId: number): Promise<Chat> =>
     client(`/api/chats/${chatId}`, {
         method: 'GET',
+    });
+
+export const createChat = (name: string): Promise<Chat> =>
+    client('/api/chats', {
+        method: 'POST',
+        body: JSON.stringify({
+            _token: getCsrfToken(),
+            name: name,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });

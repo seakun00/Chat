@@ -3,7 +3,7 @@ import { registerChatBookmark } from '@/ts/http/chatBookmarks';
 import { IconButton } from '@mui/material';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { ChatBookmarkContext } from '@/ts/ChatBookmarks/ChatBookmarkProvider';
-import { sub } from '@/ts/layout/color';
+import { sub } from '@/ts/common/color';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 type ChatBookmarkButtonProps = {
@@ -19,7 +19,7 @@ export const ChatBookmarkRegisterButton = (props: ChatBookmarkButtonProps) => {
     };
 
     return (
-        <IconButton size="small" onClick={handleClick}>
+        <IconButton size="small" onClick={handleClick} disabled={isRequest}>
             {isRequest ? (
                 <BookmarkIcon sx={{ color: sub }} />
             ) : (

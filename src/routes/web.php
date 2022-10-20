@@ -21,6 +21,9 @@ Route::prefix('api')->group(static function () {
     Route::get('/chats/{chat}', [ChatController::class, 'detail'])
         ->middleware('auth')
         ->name('chat.detail');
+    Route::post('/chats', [ChatController::class, 'create'])
+        ->middleware('auth')
+        ->name('chat.create');
     Route::get('/chats/{chat}/comments', [CommentController::class, 'index'])
         ->middleware('auth')
         ->name('comment.index');

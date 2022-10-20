@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import { Header, Spacer } from '@/ts/layout/Header';
+import { Header, Spacer } from '@/ts/Layout/Header';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Alert, Container, Stack, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { ValidationError } from '@/ts/http/error/ValidationError';
-import { client, getCsrfToken } from '@/ts/http/client';
 import { LoginError } from '@/ts/http/error/LoginError';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
-import { sub, subHover } from '@/ts/layout/color';
+import { sub, subHover } from '@/ts/common/color';
+import { login } from '@/ts/http/authentication';
 
 type FormInputs = {
-    _token: string | null;
     email: string;
     password: string;
 };
@@ -29,15 +28,8 @@ export const Login = () => {
     const navigate = useNavigate();
     const [loginError, setLoginError] = useState<string | null>();
 
-    const onSubmit = (formInputs: FormInputs) => {
-        formInputs._token = getCsrfToken() ?? null;
-        client('/api/authenticate', {
-            method: 'POST',
-            body: JSON.stringify(formInputs),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        })
+    const onSubmit = (formInputs: FormInputs) =>
+        login(formInputs.email, formInputs.password)
             .then(() => {
                 navigate('/');
             })
@@ -55,7 +47,6 @@ export const Login = () => {
                     setLoginError('メールアドレスかパスワードが間違っています');
                 }
             });
-    };
 
     return (
         <Container component="div" maxWidth="xs" sx={{ mt: 10 }}>
@@ -95,6 +86,7 @@ export const Login = () => {
                     type="submit"
                     variant="contained"
                     loading={isSubmitting}
+                    disabled={isSubmitting}
                     sx={{
                         backgroundColor: sub,
                         '&:hover': {

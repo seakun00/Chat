@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Stack } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import { useQuery } from 'react-query';
 import { Chat, getChats } from '@/ts/http/chat';
-import { ErrorAlert } from '@/ts/layout/ErrorAlert';
+import { ErrorAlert } from '@/ts/common/ErrorAlert';
 import { SearchBar } from '@/ts/Chats/SearchBar';
 import { ChatList } from '@/ts/Chats/ChatList';
+import { ChatCreateButton } from '@/ts/Chats/ChatCreateButton';
+import { ChatCreateDialog } from '@/ts/Chats/ChatCreateDialog';
 
 export const Chats = () => {
     const rows = 20;
@@ -32,22 +34,42 @@ export const Chats = () => {
         }
     );
 
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const openChatCreateDialog = () => setIsOpenDialog(true);
+    const closeChatCreateDialog = () => setIsOpenDialog(false);
+
     if (isError) {
         return <ErrorAlert />;
     } else {
         return (
             <Stack sx={{ height: '100%' }}>
-                <SearchBar
-                    setName={setName}
-                    setOffset={setOffset}
-                    setChats={setChats}
-                />
+                <Grid
+                    container
+                    alignItems="center"
+                    textAlign="center"
+                    columns={15}
+                >
+                    <Grid item xs={14} sx={{ py: 2, pl: 2 }}>
+                        <SearchBar
+                            setName={setName}
+                            setOffset={setOffset}
+                            setChats={setChats}
+                        />
+                    </Grid>
+                    <Grid item xs={1} sx={{ py: 2, px: 1 }}>
+                        <ChatCreateButton openDialog={openChatCreateDialog} />
+                    </Grid>
+                </Grid>
                 <ChatList
                     rows={rows}
                     offset={offset}
                     setOffset={setOffset}
                     isLoading={isLoading}
                     chats={chats}
+                />
+                <ChatCreateDialog
+                    isOpen={isOpenDialog}
+                    closeDialog={closeChatCreateDialog}
                 />
             </Stack>
         );
