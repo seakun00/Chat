@@ -26,7 +26,7 @@ class ChatController extends Controller
             ->limit($limit)
             ->get();
 
-        $response = $chats->map(static function(Chat $chat) {
+        $response = $chats->map(static function (Chat $chat) {
             return [
                 'id' => $chat->id,
                 'name' => $chat->name,
