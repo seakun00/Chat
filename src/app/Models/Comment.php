@@ -27,8 +27,8 @@ class Comment extends Model
         return $this->belongsTo(Chat::class);
     }
 
-    public function users(): BelongsToMany
+    public function user(): BelongsTo
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }
