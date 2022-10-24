@@ -55,7 +55,10 @@ export const ChatList = (props: ChatListProps) => {
                                 component={Link}
                                 to={`/chats/${chat.id}`}
                             >
-                                <ListItemText primary={chat.name} />
+                                <ListItemText
+                                    primary={chat.name}
+                                    secondary={`作成日時：${chat.created_at}`}
+                                />
                             </ListItemButton>
                         </ListItem>
                     );

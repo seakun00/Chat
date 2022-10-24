@@ -26,7 +26,15 @@ class ChatController extends Controller
             ->limit($limit)
             ->get();
 
-        return response()->json($chats);
+        $response = $chats->map(static function(Chat $chat) {
+            return [
+                'id' => $chat->id,
+                'name' => $chat->name,
+                'created_at' => $chat->created_at->format('Y/m/d'),
+            ];
+        });
+
+        return response()->json($response);
     }
 
     public function detail(Chat $chat): JsonResponse
