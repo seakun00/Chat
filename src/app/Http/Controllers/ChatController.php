@@ -32,6 +32,7 @@ class ChatController extends Controller
                 'name' => $chat->name,
                 'created_at' => $chat->created_at->format('Y/m/d'),
                 'comment_count' => $chat->comments->count(),
+                'comment_user_count' => $chat->comments->unique('user_id')->count()
             ];
         });
 
