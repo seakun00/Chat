@@ -4,6 +4,7 @@ export type Chat = {
     id: number;
     name: string;
     created_at: string;
+    comment_count: number;
 };
 
 export const getChats = (

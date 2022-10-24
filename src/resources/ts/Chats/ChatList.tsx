@@ -57,7 +57,7 @@ export const ChatList = (props: ChatListProps) => {
                             >
                                 <ListItemText
                                     primary={chat.name}
-                                    secondary={`作成日時：${chat.created_at}`}
+                                    secondary={`コメント数：${chat.comment_count}, 作成日時：${chat.created_at}`}
                                 />
                             </ListItemButton>
                         </ListItem>

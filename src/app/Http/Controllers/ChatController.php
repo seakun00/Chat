@@ -13,7 +13,7 @@ class ChatController extends Controller
 {
     public function index(ChatIndexRequest $request): JsonResponse
     {
-        $query = Chat::query();
+        $query = Chat::with(['comments']);
 
         $name = $request->get('name');
         if ($name) {
@@ -31,6 +31,7 @@ class ChatController extends Controller
                 'id' => $chat->id,
                 'name' => $chat->name,
                 'created_at' => $chat->created_at->format('Y/m/d'),
+                'comment_count' => $chat->comments->count(),
             ];
         });
 
