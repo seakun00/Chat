@@ -3,6 +3,9 @@ import { client, getCsrfToken } from '@/ts/http/client';
 export type Chat = {
     id: number;
     name: string;
+    created_at: string;
+    comment_count: number;
+    comment_user_count: number;
 };
 
 export const getChats = (
